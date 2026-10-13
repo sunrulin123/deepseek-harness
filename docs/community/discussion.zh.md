@@ -1,12 +1,12 @@
-# 社区 Discussion 草稿
+# 社区 Discussion 与概览参考
 
 [English](discussion.md) | 中文
 
 ## 摘要
 
-本文尚未发布。发帖前，项目链接、截图和测试声明必须与实际公开版本一致。[官方社区规则](https://github.com/deepseek-ai/deepseek-harness/discussions/1797)和 [Show Your Plugins 指南](https://github.com/deepseek-ai/deepseek-harness/discussions/2004)约束最终帖子，包括标题格式和每个项目只发一帖。
+[社区展示帖](https://github.com/deepseek-ai/deepseek-harness/discussions/9584)已由 sunrulin123 发布在官方仓库的 Show Your Plugins 分类。本文保留可复用的概览素材，并非该帖逐字副本，实际已发布文字以链接中的 Discussion 为准。[官方社区规则](https://github.com/deepseek-ai/deepseek-harness/discussions/1797)和 [Show Your Plugins 指南](https://github.com/deepseek-ai/deepseek-harness/discussions/2004)仍适用，包括每个项目只发一帖。
 
-## 建议标题
+## 展示帖标题
 
 DSH | Community Web UI | Built-in responsive Web client with separate Desktop visuals
 
@@ -20,7 +20,7 @@ DSH Community Web UI 是基于 DeepSeek Harness 的非官方社区源码版，�
 
 本版使用原有客户端组件、设计 Token、图标和 Slots registry。展示分组为显式声明，不根据扩展名称分类，也不读取私有 React 内部结构。Desktop 选择依据应用启动路径，不依赖 User-Agent 检测。
 
-详见项目 [README](../../README.zh.md)、[安装指南](install.zh.md)、[使用指南](use.zh.md)和[验证记录](verification.zh.md)。最终 Discussion 必须链接实际公开 fork 中的这些页面，且仅嵌入已审查的运行截图。移动仿真、Android 真机、受控提供方测试和真实外部模型执行必须保留各自标记。
+最新使用说明与证据见项目 [README](../../README.zh.md)、[安装指南](install.zh.md)、[使用指南](use.zh.md)和[验证记录](verification.zh.md)。复用介绍时，移动仿真、Android 真机、受控提供方测试和真实外部模型执行必须保留各自标记，截图也须对应实际测试环境。
 
 ## 致谢与反馈
 
@@ -32,6 +32,6 @@ DSH Community Web UI 是基于 DeepSeek Harness 的非官方社区源码版，�
 
 QQ：2466441707
 
-## 开发备注
+## 文案复用
 
-发帖前，确认已登录的 GitHub 身份、公开 fork 和 Release URL、分类规则，以及本项目是否已有帖子。将仓库相对链接替换为实际公开 URL，并加入已审查截图。本文不声称已发布 GitHub 帖子或 Release。
+已发布的源码预览为 [community-web-ui-v0.1.0-preview.1](https://github.com/sunrulin123/deepseek-harness/releases/tag/community-web-ui-v0.1.0-preview.1)。项目更新应沿用现有 Discussion，不另建重复展示帖。复用这些概览段落时，应保留当前链接和验证限制；发布不代表官方认可。

@@ -4,6 +4,8 @@
 
 本项目是 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的非官方社区源码预览版；上游由 [DeepSeek AI](https://deepseek.com) 开发，由个人独立维护。项目将响应式 Web 界面纳入客户端源码，同时保留上游 Desktop 的视觉表现，不代表已获官方认可或已被上游合并。
 
+[源码预览 v0.1.0-preview.1](https://github.com/sunrulin123/deepseek-harness/releases/tag/community-web-ui-v0.1.0-preview.1) · [上游社区展示帖](https://github.com/deepseek-ai/deepseek-harness/discussions/9584)
+
 ## 概述
 
 Web 设计将会话导航、原生会话工具和第三方扩展分组，改善手机阅读与输入，并继续使用 DSH 现有服务提供的任务状态。本次整合基于上游 `dsh-v0.2.0-rc.2` 源码。采用功能或平台支持结论前，请查看[验证记录](docs/community/verification.zh.md)。

@@ -40,8 +40,10 @@ The source baseline is the public `dsh-v0.2.0-rc.2` tag. Local dependency prepar
 | Public Gateway or mobile-network roaming | Deployed chain | NOT TESTED | No public relay is provided by this UI integration |
 | Public fork | GitHub UI and public API | PASS | [sunrulin123/deepseek-harness](https://github.com/sunrulin123/deepseek-harness) exists as a public fork of the official repository |
 | Community source branch | GitHub publication | PASS | `community/default-web-ui` is public and is the default branch; its published source tree matches the reviewed local tree |
+| Source preview Release | GitHub public API | PASS | [community-web-ui-v0.1.0-preview.1](https://github.com/sunrulin123/deepseek-harness/releases/tag/community-web-ui-v0.1.0-preview.1) is published as a prerelease, not a draft |
+| Upstream community showcase | Published GitHub Discussion | PASS | [Discussion #9584](https://github.com/deepseek-ai/deepseek-harness/discussions/9584) was published by sunrulin123 in Show Your Plugins |
 
-Published release entries are listed under [Releases](https://github.com/sunrulin123/deepseek-harness/releases). The [upstream Discussion draft](discussion.md) documents the proposed announcement; a draft alone does not establish that an upstream post exists.
+The [Discussion overview reference](discussion.md) links the published announcement and retains reusable introduction material. Publication does not change the platform and execution limits recorded above.
 
 ## Executed checks
 

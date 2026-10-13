@@ -1,12 +1,12 @@
-# Community Discussion draft
+# Community Discussion and overview reference
 
 English | [中文](discussion.zh.md)
 
 ## Summary
 
-This is an unpublished draft. Its project link, screenshots, and test claims must match the actual public release before posting. The [official community rules](https://github.com/deepseek-ai/deepseek-harness/discussions/1797) and [Show Your Plugins guidelines](https://github.com/deepseek-ai/deepseek-harness/discussions/2004) govern the final post, including the title format and one post per project.
+The [community showcase](https://github.com/deepseek-ai/deepseek-harness/discussions/9584) was published by sunrulin123 in the official repository's Show Your Plugins category. This page retains reusable overview material, not a verbatim copy of that post; the linked Discussion is the authoritative published text. The [official community rules](https://github.com/deepseek-ai/deepseek-harness/discussions/1797) and [Show Your Plugins guidelines](https://github.com/deepseek-ai/deepseek-harness/discussions/2004) apply, including one post per project.
 
-## Suggested title
+## Announcement title
 
 DSH | Community Web UI | Built-in responsive Web client with separate Desktop visuals
 
@@ -20,7 +20,7 @@ The taskbar separates Conversation and Trajectory navigation, native session too
 
 The edition uses the existing client components, design tokens, icons, and Slots registry. Presentation grouping is explicit; it does not classify extensions by their names or read private React internals. Desktop selection follows the application boot path, not User-Agent detection.
 
-See the project's [README](../../README.md), [installation guide](install.md), [user guide](use.md), and [verification record](verification.md). The final Discussion must link those pages in the actual public fork and embed only the reviewed runtime screenshots. Mobile emulation, Android-device tests, controlled-provider tests, and real external-model execution must retain their separate labels.
+See the project's [README](../../README.md), [installation guide](install.md), [user guide](use.md), and [verification record](verification.md) for maintained instructions and evidence. Reused descriptions must keep mobile emulation, Android-device tests, controlled-provider tests, and real external-model execution separately labeled, with screenshots drawn from their actual test contexts.
 
 ## Thanks and feedback
 
@@ -32,6 +32,6 @@ Email: 2466441707@qq.com
 
 QQ: 2466441707
 
-## Dev Note
+## Reuse
 
-Before posting, confirm the signed-in GitHub identity, public fork and release URLs, category rules, and that no earlier post exists for this project. Replace relative repository links with the actual public URLs and add the reviewed screenshots. No GitHub post or Release is asserted by this draft.
+The published source preview is [community-web-ui-v0.1.0-preview.1](https://github.com/sunrulin123/deepseek-harness/releases/tag/community-web-ui-v0.1.0-preview.1). Use the existing Discussion for project updates rather than creating another showcase post. Reuse these overview paragraphs only with current links and verification limits; publication does not establish official endorsement.

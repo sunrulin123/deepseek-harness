@@ -2,24 +2,24 @@
 # section, a hash of its English and Chinese blocks outside code blocks and generated regions.
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/community/discussion.md
-/community-discussion-draft:
-  en: a2f6d231e2cae454
-  zh: 12f99f9db447a67e
-/community-discussion-draft/summary:
-  en: e308ed53f6ee1136
-  zh: 1a59a11e8ac12ac5
-/community-discussion-draft/suggested-title:
-  en: 2dd514e4d6fe86ee
-  zh: ef8ebde2074409d9
-/community-discussion-draft/project-introduction:
+/community-discussion-and-overview-reference:
+  en: 9c3e73e2e7a4c810
+  zh: ad7afa2bd606fd62
+/community-discussion-and-overview-reference/summary:
+  en: 1f1c6d3076080318
+  zh: b55b52b7223d0ce1
+/community-discussion-and-overview-reference/announcement-title:
+  en: 489482960f348aa9
+  zh: 58126cc490a4972c
+/community-discussion-and-overview-reference/project-introduction:
   en: 260657a367269563
   zh: 5bb4692e73735883
-/community-discussion-draft/integration-and-evidence:
-  en: f943021b670c55ab
-  zh: 20148f1ddd4d706c
-/community-discussion-draft/thanks-and-feedback:
+/community-discussion-and-overview-reference/integration-and-evidence:
+  en: e4a74b6d1719b8f9
+  zh: 3ea9ec15e2f977f7
+/community-discussion-and-overview-reference/thanks-and-feedback:
   en: 48523c1a7827eca2
   zh: eeae7c7e2424c805
-/community-discussion-draft/dev-note:
-  en: ea967dcc3f62adeb
-  zh: 011ac62fa962dea4
+/community-discussion-and-overview-reference/reuse:
+  en: 9bd560aebca5d070
+  zh: 23e888244ad80e38

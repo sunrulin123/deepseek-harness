@@ -40,8 +40,10 @@
 | 公网 Gateway 或移动网络切换 | 部署链路 | NOT TESTED | 本 UI 集成不提供公网中继 |
 | 公开 fork | GitHub UI 与公开 API | PASS | [sunrulin123/deepseek-harness](https://github.com/sunrulin123/deepseek-harness) 已作为官方仓库的公开 fork 创建 |
 | 社区源码分支 | GitHub 发布 | PASS | `community/default-web-ui` 已公开并设为默认分支，发布源码树与已审阅的本地源码树一致 |
+| 源码预览 Release | GitHub 公开 API | PASS | [community-web-ui-v0.1.0-preview.1](https://github.com/sunrulin123/deepseek-harness/releases/tag/community-web-ui-v0.1.0-preview.1) 已发布为 prerelease，不是草稿 |
+| 上游社区展示帖 | 已发布 GitHub Discussion | PASS | [Discussion #9584](https://github.com/deepseek-ai/deepseek-harness/discussions/9584) 已由 sunrulin123 发布在 Show Your Plugins 分类 |
 
-已发布版本条目见 [Releases](https://github.com/sunrulin123/deepseek-harness/releases)。[上游 Discussion 草稿](discussion.zh.md)保存拟发布的介绍，草稿本身不代表上游帖子已经存在。
+[Discussion 概览参考](discussion.zh.md)链接已发布展示帖，并保留可复用的介绍素材。发布不改变上文记录的平台和执行限制。
 
 ## 已执行检查
 

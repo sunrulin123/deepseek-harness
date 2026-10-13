@@ -4,6 +4,8 @@ English | [中文](README.zh.md)
 
 An unofficial, independently maintained community source preview built on [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) by [DeepSeek AI](https://deepseek.com). This project integrates a responsive Web interface into the client source while retaining the upstream Desktop presentation. It does not claim official endorsement or acceptance upstream.
 
+[Source preview v0.1.0-preview.1](https://github.com/sunrulin123/deepseek-harness/releases/tag/community-web-ui-v0.1.0-preview.1) · [Upstream community showcase](https://github.com/deepseek-ai/deepseek-harness/discussions/9584)
+
 ## Summary
 
 The Web design groups conversation navigation, native session tools, and third-party extensions; improves mobile reading and composing; and keeps task state connected to the existing DSH services. The integration targets the upstream `dsh-v0.2.0-rc.2` source baseline. Check the [verification record](docs/community/verification.md) before relying on a feature or platform claim.
