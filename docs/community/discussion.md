@@ -26,7 +26,7 @@ See the project's [README](../../README.md), [installation guide](install.md), [
 
 Thank you to [DeepSeek AI](https://github.com/deepseek-ai) for DeepSeek Harness, to the [dsh-web](https://github.com/zhu1090093659/dsh-web) contributors for the original remote Web UI and mobile-adaptation work, and to [MrMu666/dsh-LAN](https://github.com/MrMu666/dsh-LAN) for the earlier mobile-layout reference. The [acknowledgements](../../ACKNOWLEDGEMENTS.md) explain the historical relationship and code-reuse distinction.
 
-This project is independently maintained and does not imply endorsement by DeepSeek AI or the referenced authors. Feedback on usability and integration is welcome through the community repository's available Issues or Discussions.
+This project is independently maintained and does not imply endorsement by DeepSeek AI or the referenced authors. Feedback on usability and integration is welcome through the community repository's [Issues](https://github.com/sunrulin123/deepseek-harness/issues).
 
 Email: 2466441707@qq.com
 

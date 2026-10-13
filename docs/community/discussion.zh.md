@@ -26,7 +26,7 @@ DSH Community Web UI 是基于 DeepSeek Harness 的非官方社区源码版，�
 
 感谢 [DeepSeek AI](https://github.com/deepseek-ai) 提供 DeepSeek Harness，感谢 [dsh-web](https://github.com/zhu1090093659/dsh-web) 贡献者提供原始远程 Web UI 与移动适配工作，也感谢 [MrMu666/dsh-LAN](https://github.com/MrMu666/dsh-LAN) 提供早期移动布局参考。[致谢](../../ACKNOWLEDGEMENTS.md)说明历史关系与代码复用区别。
 
-本项目由个人独立维护，不代表 DeepSeek AI 或所引用作者的认可或背书。欢迎通过社区仓库已启用的 Issues 或 Discussions 反馈易用性和集成问题。
+本项目由个人独立维护，不代表 DeepSeek AI 或所引用作者的认可或背书。欢迎通过社区仓库的 [Issues](https://github.com/sunrulin123/deepseek-harness/issues) 反馈易用性和集成问题。
 
 邮箱：2466441707@qq.com
 

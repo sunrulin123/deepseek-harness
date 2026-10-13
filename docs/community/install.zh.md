@@ -27,7 +27,7 @@ git clone --branch community/default-web-ui https://github.com/sunrulin123/deeps
 Set-Location DSH-Community-Web-UI
 ```
 
-此命令要求 GitHub 上已存在社区分支，其发布状态见[验证记录](verification.zh.md)。若 Git 找不到该分支，应核对仓库，不要改用 `master` 后假定其中已有 UI 修改。本项目提供源码预览，不是 `.exe` 安装包。
+社区分支已经发布，并设为仓库默认分支。命令仍显式指定该分支，避免把上游 `master` 误当作社区版本。本项目提供源码预览，不是 `.exe` 安装包；各平台结果见[验证记录](verification.zh.md)。
 
 <a id="build-and-start"></a>
 
@@ -84,7 +84,7 @@ Android 验收时，在 Chrome 打开配置好的地址，检查任务栏，展�
 
 ## 反馈
 
-邮箱：2466441707@qq.com。QQ：2466441707。公开问题请通过仓库可用的 Issues 或 Discussions 反馈，日志中移除凭据、私人路径和聊天内容。
+邮箱：2466441707@qq.com。QQ：2466441707。公开问题请通过 [Issues](https://github.com/sunrulin123/deepseek-harness/issues) 反馈，日志中移除凭据、私人路径和聊天内容。
 
 ## 开发备注
 

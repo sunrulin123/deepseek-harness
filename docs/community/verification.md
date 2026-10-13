@@ -4,7 +4,7 @@ English | [中文](verification.zh.md)
 
 ## Summary
 
-This record distinguishes the native source edition from the earlier installed-plugin deployment. A previous plugin test does not verify the new source build. The release remains under verification; the table below records only evidence available for this edition.
+This record distinguishes the native source edition from the earlier installed-plugin deployment. A previous plugin test does not verify the new source build. The table records checks actually performed for this edition and preserves their limits.
 
 ## Environment and result labels
 
@@ -39,7 +39,9 @@ The source baseline is the public `dsh-v0.2.0-rc.2` tag. Local dependency prepar
 | Android Chrome | Physical device | NOT TESTED | Earlier plugin acceptance does not verify this source edition |
 | Public Gateway or mobile-network roaming | Deployed chain | NOT TESTED | No public relay is provided by this UI integration |
 | Public fork | GitHub UI and public API | PASS | [sunrulin123/deepseek-harness](https://github.com/sunrulin123/deepseek-harness) exists as a public fork of the official repository |
-| Community branch, Release, and Discussion | Publication | NOT TESTED | The fork currently contains upstream master; the community branch, Release, and Discussion are not published |
+| Community source branch | GitHub publication | PASS | `community/default-web-ui` is public and is the default branch; its published source tree matches the reviewed local tree |
+
+Published release entries are listed under [Releases](https://github.com/sunrulin123/deepseek-harness/releases). The [upstream Discussion draft](discussion.md) documents the proposed announcement; a draft alone does not establish that an upstream post exists.
 
 ## Executed checks
 
@@ -105,7 +107,3 @@ The child and job images show real native execution using the controlled adapter
 - New official header entries need explicit presentation grouping; unknown entries are not automatically identified as official.
 - The UI marker does not change authorization, pairing, networking, or model configuration.
 - No external model test, physical-device result, or public deployment is implied by a component test.
-
-## Dev Note
-
-The release maintainer must update this record from the actual test output and reviewed screenshots before publication. Preserve failed and blocked outcomes until new evidence resolves them; do not convert pending rows to PASS based on implementation alone.

@@ -81,7 +81,7 @@ If authentication expires, use the existing login or pairing flow for the server
 
 ## Feedback
 
-Email: 2466441707@qq.com. QQ: 2466441707. Include the entry name, viewport, theme, and a redacted screenshot; do not post personal conversations or credentials.
+Email: 2466441707@qq.com. QQ: 2466441707. Submit public reports through [Issues](https://github.com/sunrulin123/deepseek-harness/issues) with the entry name, viewport, theme, and a redacted screenshot; do not post personal conversations or credentials.
 
 ## Dev Note
 

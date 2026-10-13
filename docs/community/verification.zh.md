@@ -4,7 +4,7 @@
 
 ## 摘要
 
-本文区分原生源码版与早期已安装插件部署。先前插件测试不能验证新源码构建。本次发布仍在验证中；下表只记录本版已有证据。
+本文区分原生源码版与早期已安装插件部署。先前插件测试不能验证新源码构建。下表记录本版实际执行过的检查，并保留各项结论的限制。
 
 ## 环境与结果标记
 
@@ -39,7 +39,9 @@
 | Android Chrome | 真机 | NOT TESTED | 先前插件验收不能验证本源码版 |
 | 公网 Gateway 或移动网络切换 | 部署链路 | NOT TESTED | 本 UI 集成不提供公网中继 |
 | 公开 fork | GitHub UI 与公开 API | PASS | [sunrulin123/deepseek-harness](https://github.com/sunrulin123/deepseek-harness) 已作为官方仓库的公开 fork 创建 |
-| 社区分支、Release 与 Discussion | 发布 | NOT TESTED | fork 目前包含上游 master；社区分支、Release 与 Discussion 尚未发布 |
+| 社区源码分支 | GitHub 发布 | PASS | `community/default-web-ui` 已公开并设为默认分支，发布源码树与已审阅的本地源码树一致 |
+
+已发布版本条目见 [Releases](https://github.com/sunrulin123/deepseek-harness/releases)。[上游 Discussion 草稿](discussion.zh.md)保存拟发布的介绍，草稿本身不代表上游帖子已经存在。
 
 ## 已执行检查
 
@@ -105,7 +107,3 @@
 - 新官方 Header 入口需要显式展示分组；未知入口不会自动被识别为官方。
 - UI 标记不改变授权、配对、网络或模型配置。
 - 组件测试不意味着已完成外部模型测试、真机验证或公网部署。
-
-## 开发备注
-
-发布前，维护者必须根据实际测试输出和已审查截图更新此记录。失败和阻塞结果应保留到新证据解决为止；不要仅依据实现把待验行改为 PASS。

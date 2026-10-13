@@ -88,7 +88,7 @@ The upstream [MIT License](LICENSE), original copyright, and [third-party notice
 
 ## Contact and feedback
 
-This is an independently maintained community project. Use this repository's Issues or Discussions, where enabled, for public technical reports; include the version, viewport, reproduction steps, and a redacted screenshot.
+This is an independently maintained community project. Submit public technical reports through [Issues](https://github.com/sunrulin123/deepseek-harness/issues); include the version, viewport, reproduction steps, and a redacted screenshot.
 
 Email: 2466441707@qq.com
 

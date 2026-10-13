@@ -27,7 +27,7 @@ git clone --branch community/default-web-ui https://github.com/sunrulin123/deeps
 Set-Location DSH-Community-Web-UI
 ```
 
-This command requires the community branch to be present on GitHub; the [verification record](verification.md) records its publication status. If Git cannot find that branch, check the repository instead of substituting `master` and assuming it contains the UI changes. This is a source preview, not an `.exe` installer.
+The community branch is published and is the repository's default branch. The command names it explicitly so an upstream `master` checkout is not mistaken for the community edition. This is a source preview, not an `.exe` installer; platform results are in the [verification record](verification.md).
 
 <a id="build-and-start"></a>
 
@@ -84,7 +84,7 @@ Returning to the official Desktop application does not require copying Web asset
 
 ## Feedback
 
-Email: 2466441707@qq.com. QQ: 2466441707. For public reports, use the repository's available Issues or Discussions and remove credentials, private paths, and chat contents from logs.
+Email: 2466441707@qq.com. QQ: 2466441707. Submit public reports through [Issues](https://github.com/sunrulin123/deepseek-harness/issues) and remove credentials, private paths, and chat contents from logs.
 
 ## Dev Note
 
