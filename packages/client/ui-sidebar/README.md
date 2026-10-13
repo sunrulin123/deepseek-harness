@@ -27,6 +27,8 @@ The dsh web client sidebar lets users recognize the active build, start a new se
 <a id="use-this-package"></a>
 ## Use this package
 
+In the [community Web presentation](../../../docs/community/develop.md#desktop-and-browser-selection), the frame reuses `HeaderLeadingControls` on narrow screens, with 44px touch controls and the original sidebar and New Session actions. The frame owns the sidebar overlay; this package does not create a second navigation rail or alter Desktop caption controls.
+
 The sidebar is the navigation shell: users see the brand, start new sessions, collapse the rail, and reach Settings. Feature plugins fill its seats — ui-workspace fills `sidebar.workspaces`, ui-settings registers the trigger row and settings panel at `sidebar.settings`.
 
 ### Brand and New Session

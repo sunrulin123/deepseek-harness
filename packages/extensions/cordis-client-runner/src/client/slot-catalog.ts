@@ -143,6 +143,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner currency of finalized-assistant actions. */\nexport interface AssistantActionOwnerProps {\n  messageId: MessageId\n}',
@@ -322,6 +328,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner currency of the completed-Turn extension chain. */\nexport interface TurnTailOwnerProps {\n  turn: TurnLocation\n  seq: number\n  openFile: (path: string) => void\n}',
@@ -474,6 +486,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [],
@@ -808,6 +826,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Point-in-time owner values for composer extension entries. */\nexport interface InputZone {\n  readonly session: SessionSnapshot\n  readonly input: InputState\n}',
@@ -870,6 +894,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [],
@@ -963,6 +993,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [],
@@ -1100,6 +1136,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [],
     ownerPropsReferences: [],
@@ -1196,6 +1238,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [
@@ -1329,9 +1377,15 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
-      '/** Header actions derive their state from standard Session props. */\nexport interface ConversationHeaderActionOwnerProps {\n  /** Marker field: entries receive no owner-specific values. */\n  children?: never\n}',
+      '/** Header actions derive their state from standard Session props. */\nexport interface ConversationHeaderActionOwnerProps {\n  /** Compact native presentation selected by the Community Web header only. */\n  communityWeb?: boolean\n  /** Header action entries receive no React children from their parent. */\n  children?: never\n}',
     ],
     ownerPropsReferences: [],
     standardProps: [
@@ -1470,9 +1524,15 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
-      '/** Header actions derive their state from standard Session props. */\nexport interface ConversationHeaderActionOwnerProps {\n  /** Marker field: entries receive no owner-specific values. */\n  children?: never\n}',
+      '/** Header actions derive their state from standard Session props. */\nexport interface ConversationHeaderActionOwnerProps {\n  /** Compact native presentation selected by the Community Web header only. */\n  communityWeb?: boolean\n  /** Header action entries receive no React children from their parent. */\n  children?: never\n}',
     ],
     ownerPropsReferences: [],
     standardProps: [
@@ -1573,6 +1633,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Conversation View entries obtain their data from registered standard hooks. */\nexport interface ConvViewOwnerProps {\n  /** Open a tool call\'s inspector when an inspection target is available. */\n  inspectCall: ((callId: string) => void) | undefined\n  /** Focus request addressed to the selected View. */\n  viewRequest: import(\'./views.ts\').ConversationViewRequest | null\n  /** Select a View and address one opaque focus identity to it. */\n  openView: (view: string, focus: string) => void\n  /** Acknowledge the current one-shot focus request. */\n  completeViewRequest: () => void\n}',
@@ -1634,6 +1700,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Native file action selected by an explicit user gesture. */\nexport type PresentedAction = \'open\' | \'reveal\'',
@@ -1692,6 +1764,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [
@@ -1904,6 +1982,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** The owner props every detail contribution is rendered with. */\nexport interface PluginDetailProps {\n  /** The subject of the open page; an entry renders null for a subject it has nothing for. */\n  readonly subject: PluginsSubject\n}',
@@ -1953,6 +2037,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [
@@ -2004,6 +2094,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** The owner props every detail contribution is rendered with. */\nexport interface PluginDetailProps {\n  /** The subject of the open page; an entry renders null for a subject it has nothing for. */\n  readonly subject: PluginsSubject\n}',
@@ -2053,6 +2149,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [
@@ -2251,6 +2353,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner share of the header title seat (the shell supplies nothing). */\nexport interface SettingsHeaderOwnerProps {\n  /** Marker field: header owner props are intentionally empty. */\n  children?: never\n}',
@@ -2331,6 +2439,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [
@@ -2455,6 +2569,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner share of the footer area (the section supplies nothing). */\nexport interface ModelsFooterOwnerProps {\n  /** Marker field: footer owner props are intentionally empty. */\n  children?: never\n}',
@@ -2570,6 +2690,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner share of the currently active settings-backed onboarding step. */\nexport interface SettingsOnboardingOwnerProps {\n  /** Stable id of the step currently selected by the coordinator. */\n  stepId: string\n  /** User explicitly reopened this step outside first-run onboarding. */\n  explicit?: boolean\n  /** Complete or skip this step and transfer ownership to the next entry. */\n  complete: () => void\n  /** Open the settings panel directly on one registered section. */\n  openSection: (id: string) => void\n}',
@@ -2621,6 +2747,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner share of a Plugins tab (the section supplies nothing). */\nexport interface SettingsPluginsTabOwnerProps {\n  /** Marker field: tab owner props are intentionally empty. */\n  children?: never\n}',
@@ -2670,6 +2802,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [
@@ -2784,6 +2922,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [],
@@ -3012,6 +3156,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner share of an action rendered beside Settings at the sidebar foot. */\nexport interface SidebarFooterActionOwnerProps {\n  /** Whether the sidebar renders wide content (false = 56px rail). */\n  wide: boolean\n}',
@@ -3061,6 +3211,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [
@@ -3318,6 +3474,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [],
     ownerPropsReferences: [],
@@ -3422,6 +3584,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [],
     ownerPropsReferences: [],
@@ -3477,6 +3645,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [],
@@ -3622,6 +3796,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner share of one tab-menu item occurrence. */\nexport interface SidebarRightTabMenuOwnerProps {\n  /** The tab whose menu is open. */\n  tab: TabRecord\n  /**\n   * Dismiss the menu.\n   *\n   * An item that acts MUST call this: the menu is the kit\'s, and it closes on\n   * its own actions only. An item that leaves it open leaves a menu floating\n   * over content the action may have just replaced.\n   */\n  dismiss: () => void\n}',
@@ -3680,6 +3860,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/**\n * Owner share of the two Session-row schedule seats. Both receive only the\n * row\'s Session identity: the occupant reads that Session\'s own scheduled\n * tasks, and reading them activates nothing.\n */\nexport interface SessionRowScheduleOwnerProps {\n  /** Session this row shows; the occupant addresses its own data by this id. */\n  readonly sessionId: SessionId\n}',
@@ -3731,6 +3917,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [
@@ -3907,6 +4099,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
       },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
+      },
     ],
     ownerProps: [
       '/** Owner share of one Session row action occurrence: the row the action belongs to. */\nexport interface SessionRowOwnerProps {\n  /** Session the row shows. */\n  sessionId: SessionId\n  /** Row display title: persisted title, or empty when the Session has none. */\n  displayTitle: string\n}',
@@ -3961,6 +4159,12 @@ export const CLIENT_SLOT_API: readonly ClientSlotEntry[] = [
         requirement: 'optional',
         type: 'string | (() => string)',
         doc: 'Display text where the owner projects one (nav rows, tabs). A thunk is re-read on every projection, so localized text follows the active locale without re-registering.',
+      },
+      {
+        name: 'group',
+        requirement: 'optional',
+        type: 'string',
+        doc: 'Presentation group selected by the slot owner. Owners may include or exclude groups when rendering; this is not package ownership or authorization.',
       },
     ],
     ownerProps: [

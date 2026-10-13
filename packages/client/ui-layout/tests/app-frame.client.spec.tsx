@@ -3,7 +3,7 @@
 import type { GlobalStandardProps, RenderOpts } from '@deepseek-ai/dsh-client-ui-slots'
 import { bindSnapshotSelector } from '@deepseek-ai/dsh-client-test-runtime'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { act, cleanup, render } from '@testing-library/react'
+import { act, cleanup, fireEvent, render } from '@testing-library/react'
 import { AppFrame } from '../src/client/AppFrame.tsx'
 import type { AppFrameProps } from '../src/client/AppFrame.tsx'
 import type { MainPanelId, RightbarOwnerProps, SidebarOwnerProps } from '../src/client/index.ts'
@@ -60,12 +60,17 @@ function resize(width: number): void {
   })
 }
 
-function mountFrame(windowWidth = frameWidth) {
+function mountFrame(windowWidth = frameWidth, interactiveNavigation = false) {
   vi.stubGlobal('innerWidth', windowWidth)
   const instance = createLayoutStore().create()
   const slotCalls: { key: string; props: object; options: RenderOpts | undefined }[] = []
   const renderSlot: AppFrameProps['renderSlot'] = (key, owner, options) => {
     slotCalls.push({ key, props: owner, options })
+    if (interactiveNavigation) {
+      if (key === 'shell.leading') return <button onClick={instance.actions.toggleSidebar}>Open navigation</button>
+      if (key === 'sidebar') return <><button>First sidebar action</button><button>Last sidebar action</button></>
+      if (key === 'main') return <button>Background action</button>
+    }
     return <div data-testid={`${key}-content`} data-entry-key={options?.entryKey} />
   }
   const useSessions: AppFrameProps['useSessions'] = sel => sel({
@@ -174,6 +179,7 @@ afterEach(() => {
     cleanup()
   } finally {
     delete document.documentElement.dataset.platform
+    delete document.documentElement.dataset.communityWebUi
     for (const restore of restoreProperties.splice(0).reverse()) restore()
     document.title = originalTitle
     vi.restoreAllMocks()
@@ -183,6 +189,74 @@ afterEach(() => {
 })
 
 describe('AppFrame', () => {
+  it('keeps mobile Web navigation reachable without squeezing the conversation', () => {
+    document.documentElement.dataset.communityWebUi = 'true'
+    frameWidth = 393
+    const view = mountFrame()
+    expect(tracks(view.frame)).toEqual([0, 0])
+    expect(view.frame.querySelector('[data-shell-leading]')).not.toBeNull()
+    act(() => { view.instance.actions.toggleSidebar() })
+    expect(tracks(view.frame)).toEqual([0, 0])
+    expect(view.sidebarOwner()).toEqual({ collapsed: false, width: 280 })
+    act(() => { view.getByRole('button', { name: 'close' }).click() })
+    expect(view.sidebarOwner().collapsed).toBe(true)
+  })
+
+  it('follows and releases the mobile visual viewport without changing session state', () => {
+    document.documentElement.dataset.communityWebUi = 'true'
+    frameWidth = 393
+    const visual = Object.assign(new EventTarget(), { height: 800, offsetTop: 0, scale: 1 })
+    vi.stubGlobal('visualViewport', visual)
+    const remove = vi.spyOn(visual, 'removeEventListener')
+    const view = mountFrame()
+    expect(view.frame.style.getPropertyValue('--community-viewport-height')).toBe('800px')
+    visual.height = 420
+    visual.offsetTop = 12
+    act(() => { visual.dispatchEvent(new Event('resize')); flushFrames() })
+    expect(view.frame.style.getPropertyValue('--community-viewport-height')).toBe('420px')
+    expect(view.frame.style.getPropertyValue('--community-viewport-top')).toBe('12px')
+    visual.scale = 2
+    act(() => { visual.dispatchEvent(new Event('scroll')); flushFrames() })
+    expect(view.frame.style.getPropertyValue('--community-viewport-height')).toBe('')
+    view.unmount()
+    expect(remove.mock.calls.map(call => call[0])).toEqual(['resize', 'scroll'])
+    expect(view.frame.style.getPropertyValue('--community-viewport-top')).toBe('')
+  })
+
+  it('contains mobile sidebar focus, closes on Escape and restores the invoking control', () => {
+    document.documentElement.dataset.communityWebUi = 'true'
+    frameWidth = 393
+    const view = mountFrame(393, true)
+    const trigger = view.getByRole('button', { name: 'Open navigation' })
+    trigger.focus()
+    fireEvent.click(trigger)
+    const dialog = view.getByRole('dialog', { name: 'navigation' })
+    const first = view.getByRole('button', { name: 'First sidebar action' })
+    const last = view.getByRole('button', { name: 'Last sidebar action' })
+    expect(dialog.contains(document.activeElement)).toBe(true)
+    expect(document.activeElement).toBe(first)
+    expect(view.getByRole('button', { name: 'Background action' }).closest('[inert]')).not.toBeNull()
+    last.focus()
+    fireEvent.keyDown(last, { key: 'Tab' })
+    expect(document.activeElement).toBe(first)
+    fireEvent.keyDown(first, { key: 'Tab', shiftKey: true })
+    expect(document.activeElement).toBe(last)
+    fireEvent.keyDown(last, { key: 'Escape' })
+    expect(view.queryByRole('dialog')).toBeNull()
+    expect(document.activeElement).toBe(trigger)
+    expect(view.getByRole('button', { name: 'Background action' }).closest('[inert]')).toBeNull()
+  })
+
+  it('retains the original narrow Desktop rail and ignores keyboard adaptation', () => {
+    frameWidth = 393
+    const visual = Object.assign(new EventTarget(), { height: 420, offsetTop: 0, scale: 1 })
+    vi.stubGlobal('visualViewport', visual)
+    const view = mountFrame()
+    expect(tracks(view.frame)).toEqual([56, 0])
+    expect(view.frame.hasAttribute('data-mobile-web')).toBe(false)
+    expect(view.frame.style.getPropertyValue('--community-viewport-height')).toBe('')
+  })
+
   it('localizes the product title without a configured build title', () => {
     mountFrame()
     expect(document.title).toBe('DSH Local Build')

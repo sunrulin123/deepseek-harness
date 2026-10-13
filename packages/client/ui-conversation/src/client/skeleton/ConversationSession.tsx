@@ -8,6 +8,7 @@ import type {
 } from '../contract/slots.ts'
 import { resolveActiveView } from '../view-selection.ts'
 import { DefaultConversationViews } from './DefaultConversationViews.tsx'
+import { HeaderPlugins } from './HeaderPlugins.tsx'
 import css from './ConversationRoot.module.css'
 
 /** Full props composed from the strict session body contract. */
@@ -57,7 +58,7 @@ function equalBreadcrumbs(left: readonly Breadcrumb[], right: readonly Breadcrum
  */
 export function ConversationSessionHeader({
   sessionId, hideChrome, useSessions, useConversationViews, useStore,
-  renderSlot, open, selectView, t,
+  renderSlot, open, selectView, t, communityWeb = false,
 }: ConversationSessionHeaderProps) {
   const tabs = useConversationViews(value => value)
   const selectedId = useStore(s => s.view)
@@ -124,12 +125,12 @@ export function ConversationSessionHeader({
                 })}
                 {ancestry.length === 0 && <span className={css.crumbCurrent}>{sessionId}</span>}
               </nav>
-              <div className={css.headerActions}>
+              {!communityWeb && <div className={css.headerActions}>
                 {renderSlot('conversation.session.header.actions', {})}
-              </div>
+              </div>}
             </div>
             <div className={css.headerUtilities}>
-              {renderSlot('conversation.session.header.utilities', {})}
+              {renderSlot('conversation.session.header.utilities', communityWeb ? { communityWeb } : {})}
             </div>
           </>
         )}
@@ -154,6 +155,14 @@ export function ConversationSessionHeader({
             </button>
           ))}
         </div>
+      )}
+      {communityWeb && !hideChrome && (
+        <>
+          <div className={css.communityNativeTools} role="group" aria-label={t('header.tools')} data-community-native-tools="">
+            {renderSlot('conversation.session.header.actions', { communityWeb }, { group: 'native' })}
+          </div>
+          <HeaderPlugins renderSlot={renderSlot} t={t} />
+        </>
       )}
     </>
   )

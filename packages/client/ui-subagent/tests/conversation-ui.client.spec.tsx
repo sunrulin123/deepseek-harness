@@ -154,6 +154,18 @@ function HeaderCatalog(props: SubagentHeaderLineageProps) {
 }
 
 describe('SubagentHeaderLineage', () => {
+  it('shows direct catalog total in the community trigger while preserving running semantics and child navigation', () => {
+    const input = props(catalog())
+    render(<SubagentCatalogAction {...input} communityWeb />)
+    const trigger = screen.getByRole('button', { name: '1 个子智能体，正在运行' })
+    expect(trigger.textContent).toBe('2')
+    expect(trigger.title).toBe('2 个子智能体')
+    fireEvent.click(trigger)
+    const tree = screen.getByRole('tree', { name: '子智能体会话' })
+    fireEvent.click(within(tree).getByText('worker'))
+    expect(input.openChild).toHaveBeenCalledWith({ childSessionId: CHILD, parentSessionId: PARENT, mode: 'continuable' })
+  })
+
   it('shows current catalog-only child status before Host list discovery', () => {
     const input = props(catalog({ entries: [{ id: CHILD, mode: 'continuable', label: 'worker', activity: 'inactive' }] }))
     const initial = input.useSessions(state => state)

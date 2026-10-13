@@ -1,0 +1,31 @@
+# Bilingual-pair consistency record for verification.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/community/verification.md
+/community-edition-verification-record:
+  en: d7ecc31d5d360a47
+  zh: d63b2e72bfe5871d
+/community-edition-verification-record/summary:
+  en: f3757b470da7863a
+  zh: 4c912df709a748f0
+/community-edition-verification-record/environment-and-result-labels:
+  en: 122f35c61aca9bda
+  zh: 332578bbc76c7b97
+/community-edition-verification-record/verification-matrix:
+  en: ecb0f0cf97eaed53
+  zh: 15325b559bce943d
+/community-edition-verification-record/executed-checks:
+  en: 1a98b6c2321b4529
+  zh: eeaecd53a997a2b2
+/community-edition-verification-record/native-runtime-acceptance:
+  en: e2a32651985e30f9
+  zh: 94191f8200214ca7
+/community-edition-verification-record/screenshots:
+  en: 207ecd74f5735e8f
+  zh: dad8ceeeaf606e22
+/community-edition-verification-record/known-limits:
+  en: a04692f3de57b948
+  zh: b941456ba4008fa8
+/community-edition-verification-record/dev-note:
+  en: 9bed20d693844a38
+  zh: da539835c11f072f

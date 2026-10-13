@@ -27,6 +27,10 @@ English | [中文](README.zh.md)
 
 Compose UI through this package whenever you write a client plugin: register a component into a slot your parent declared, or declare child slots your component renders. The four kinds cover the composition shapes — `single` (one occupant), `list` (ordered entries), `keyed` (dispatch by a key), and `chain` (entries elect themselves).
 
+### List presentation groups
+
+List registrations accept an optional parent-defined `group`. A parent can render a group with `renderSlot(..., { group })` or omit named groups with `excludeGroups`; ungrouped entries remain in the latter selection. These presentation filters do not grant permissions or identify a package publisher. Without a filter, all entries keep the original ordering and rendering behavior. See [Slots](../../../docs/subsystems/slots.md#cardinality-and-scope) for composition with `only`, priority, and fallback.
+
 ### Reusable Component Factories
 
 Use a Component Factory when one package defines an assembly that unrelated parents render independently. Declare its complete type in `SlotFactoryMap`, install the definition with `ctx.slots.registerFactory()`, render occurrences through the injected `renderFactorySlot()`, and select each declared local Component through the call's `slots` option. The definition reads that choice through `useFactorySlot(name, fallback)`.

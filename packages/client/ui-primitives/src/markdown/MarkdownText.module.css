@@ -46,6 +46,24 @@
   margin: 16px 0;
 }
 
+@media (max-width: 767px), (any-pointer: coarse) and (max-width: 1023px) {
+  :global(html[data-community-web-ui='true']) .markdown :where(h1, h2, h3) {
+    margin: 24px 0 12px;
+  }
+
+  :global(html[data-community-web-ui='true']) .markdown :where(p, ul, ol, blockquote) {
+    margin-block: 12px;
+  }
+
+  :global(html[data-community-web-ui='true']) .markdown > :first-child {
+    margin-top: 0;
+  }
+
+  :global(html[data-community-web-ui='true']) .markdown > :last-child {
+    margin-bottom: 0;
+  }
+}
+
 /* Tighten h4–h6 against a following list (design: 8px gap). */
 .markdown :where(h4, h5, h6) + :where(ul, ol) {
   margin-top: 8px;

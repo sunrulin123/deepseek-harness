@@ -1,0 +1,37 @@
+# Bilingual-pair consistency record for develop.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/community/develop.md
+/develop-the-community-web-client:
+  en: 29f84a3713cd1e6a
+  zh: 511496a3160105b4
+/develop-the-community-web-client/summary:
+  en: 996b4d0384a281a1
+  zh: 4e1d703bf898272f
+/develop-the-community-web-client/contents:
+  en: 1397db3b761a0549
+  zh: a8c7ca98c26be977
+/develop-the-community-web-client/source-baseline-and-scope:
+  en: 0b5148d12374d547
+  zh: cc54416d9afafd8d
+/develop-the-community-web-client/desktop-and-browser-selection:
+  en: c1703327f34d5437
+  zh: ea0e72bdac71bef1
+/develop-the-community-web-client/header-registration:
+  en: 1ac153ff1db00e2b
+  zh: 31e6fe62a40a1691
+/develop-the-community-web-client/visual-components:
+  en: ef21b2ec02e829ad
+  zh: af90e718d6ef5d74
+/develop-the-community-web-client/build-and-verify:
+  en: efc2688e80598697
+  zh: 22eaf0acc0aa4b25
+/develop-the-community-web-client/track-upstream-changes:
+  en: 3428f3b7d4aaeee1
+  zh: b751345b3e9adc59
+/develop-the-community-web-client/contribute-safely:
+  en: f3b833f63de1d9bb
+  zh: 2b01a839a1bfd96c
+/develop-the-community-web-client/dev-note:
+  en: 7fddcdcdef768016
+  zh: 553c363ff3c90501

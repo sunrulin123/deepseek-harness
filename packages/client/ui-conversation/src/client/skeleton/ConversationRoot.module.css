@@ -543,3 +543,226 @@ button.crumb:hover {
 .embeddedBody[data-content-phase='settling'] .composerSeat {
   visibility: hidden;
 }
+
+/* The packaged Electron entry never selects this presentation. */
+:global(html[data-community-web-ui='true']) .header {
+  position: relative;
+  z-index: 8;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  gap: 0 8px;
+  min-height: 0;
+  padding: 8px 24px 0;
+}
+
+:global(html[data-community-web-ui='true']) .header::before {
+  content: '';
+  order: 1;
+  flex-basis: 100%;
+  height: 4px;
+}
+
+:global(html[data-community-web-ui='true']) :is(.titleRow, .titleCluster) {
+  display: contents;
+  container-type: normal;
+}
+
+:global(html[data-community-web-ui='true']) .crumbs {
+  order: 0;
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  margin-inline-start: max(0px, calc(var(--dsh-frame-leading-clearance, 0px) - 24px));
+}
+
+:global(html[data-community-web-ui='true']) .crumbCurrent {
+  max-width: none;
+  min-width: 0;
+}
+
+:global(html[data-community-web-ui='true']) :is(.headerLeading, .headerCorner) {
+  order: 0;
+  flex: none;
+  margin: 0;
+}
+
+:global(html[data-community-web-ui='true']) .tabs {
+  order: 2;
+  flex: none;
+  align-items: center;
+  gap: 24px;
+  margin: 0 12px 0 0;
+  padding: 0;
+}
+
+:global(html[data-community-web-ui='true']) .tab {
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.communityNativeTools,
+:global(html[data-community-web-ui='true']) .headerUtilities {
+  order: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+}
+
+.communityNativeTools:not(:has(button, a)),
+:global(html[data-community-web-ui='true']) :is(.headerLeading, .headerUtilities):not(:has(button, a)) {
+  display: none;
+}
+
+.communityPlugins {
+  order: 4;
+  display: contents;
+}
+
+.communityPlugins:not(:has(.communityPluginMenu :global([data-slot]) > *)) {
+  display: none;
+}
+
+.communityPluginTrigger {
+  order: 4;
+  margin-left: auto;
+}
+
+.communityPluginIcon {
+  display: none;
+}
+
+:global(html[data-community-web-ui='true']) :is(:global([data-community-header-control]), .headerUtilities button),
+.communityPluginTrigger {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 6px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--dsw-radius-md);
+  background: transparent;
+  color: var(--dsw-alias-label-secondary);
+  font: inherit;
+  font-size: 13px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+:global(html[data-community-web-ui='true']) :is(:global([data-community-header-control]), .headerUtilities button, .communityPluginTrigger):is(:hover, :global([aria-expanded='true'])) {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-primary);
+}
+
+:global(html[data-community-web-ui='true']) .header button:focus-visible {
+  outline: var(--dsw-focus-ring-width) solid var(--dsw-focus-ring-color, var(--dsw-alias-state-business-primary));
+  outline-offset: -2px;
+}
+
+:global(html[data-community-web-ui='true']) :global([data-community-header-control]) > svg {
+  flex: none;
+}
+
+:global(html[data-community-web-ui='true']) :global([data-community-header-control='subagents']) > span {
+  min-width: 16px;
+  margin: 0;
+  text-align: center;
+}
+
+:global(html[data-community-web-ui='true']) :global([data-community-control-count]) {
+  min-width: 16px;
+  padding: 0 3px;
+  border-radius: var(--dsw-radius-md);
+  background: var(--dsw-alias-fill-tsp-secondary);
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.communityChevronOpen {
+  transform: rotate(180deg);
+}
+
+.communityPluginMenu {
+  order: 5;
+  box-sizing: border-box;
+  flex: 0 0 100%;
+  min-width: 0;
+  margin: 4px 0 8px;
+  padding: 8px;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  box-shadow: var(--dsw-elevation-panel);
+}
+
+.communityPluginMenu[hidden] { display: none; }
+
+.communityPluginMenu :global([data-slot]) > * {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+/* Short menus retain overflow for an extension's own anchored popover. */
+.communityPluginMenu:has(:global([data-slot]) > :nth-child(n + 6)) {
+  max-height: min(60dvh, 480px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 1100px) {
+  :global(html[data-community-web-ui='true']) :global([data-community-header-control='team']) :global([data-community-control-label]) { display: none; }
+}
+
+@media (max-width: 1023px) {
+  :global(html[data-community-web-ui='true']) .header {
+    gap: 0 4px;
+    padding: 0 12px;
+  }
+  :global(html[data-community-web-ui='true']) .crumbs {
+    min-height: 44px;
+    margin-inline-start: max(0px, calc(var(--dsh-frame-leading-clearance, 0px) - 12px));
+  }
+  :global(html[data-community-web-ui='true']) .headerCorner { min-width: 44px; height: 44px; }
+  /* Session export and conditional utilities remain beside the title, leaving
+     the next row to view tabs, native execution tools, and extensions. */
+  :global(html[data-community-web-ui='true']) .headerUtilities { order: 0; flex: none; }
+  :global(html[data-community-web-ui='true']) .tabs { gap: 0; margin-right: 4px; }
+  :global(html[data-community-web-ui='true']) .tab { box-sizing: border-box; min-width: 44px; padding: 12px 4px; }
+  .communityNativeTools, :global(html[data-community-web-ui='true']) .headerUtilities { gap: 4px; }
+  :global(html[data-community-web-ui='true']) :is(:global([data-community-header-control]), .headerUtilities button), .communityPluginTrigger {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 6px;
+    gap: 4px;
+  }
+  :global(html[data-community-web-ui='true']) :global([data-community-header-control='jobs']) :global([data-community-control-label]) { display: none; }
+  :global(html[data-community-web-ui='true']) :global([data-community-header-control]) > svg:last-child:not(:first-child) { display: none; }
+  .communityPluginIcon { display: block; }
+  .communityPluginLabel, .communityPluginChevron { display: none; }
+  .communityPluginMenu button { min-height: 44px; }
+}
+
+@media (max-width: 767px), (pointer: coarse) and (max-width: 1023px) {
+  :global(html[data-community-web-ui='true']) .body {
+    --dsh-chat-content-width: calc(100% - 32px);
+    --dsh-composer-card-max-width: calc(100% - 16px);
+    --dsh-composer-side-clearance: 8px;
+    --dsh-composer-dock-inset: 8px;
+  }
+  :global(html[data-community-web-ui='true']) .composerSeat {
+    --dsh-composer-text-max-height: min(240px, 35dvh);
+  }
+}

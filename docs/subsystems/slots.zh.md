@@ -43,6 +43,7 @@ export function apply(ctx: Context): void {
 }
 ```
 
+<a id="cardinality-and-scope"></a>
 ## Cardinality 与 scope
 
 Slot 声明固定两个相互独立的维度。
@@ -58,6 +59,8 @@ Slot 声明固定两个相互独立的维度。
 | scope | `session` | 要求可解析的外围 Provider binding，并收到确定存在的 Session 值。 |
 
 对于 `single`、`list` 和 `keyed` cell，`priority` 是遮蔽优先级；对于 `chain`，它是选举顺序。数值越小越先运行或渲染。普通增量贡献应选用新的 list `id` 或 keyed `key`；复用已有 cell 表示有意替换其展示。
+
+对于 list slot，注册项的可选 `group` 是父组件定义的展示元数据。`renderSlot` 接受 `group` 来选择一个完全匹配的分组，或通过 `excludeGroups` 排除具名分组并保留未分组条目；两者均在确定 priority 胜者及排序后与 `only` 求交集。筛选结果为空时渲染 `fallback`。不提供筛选时保留完整列表。父组件渲染多个 outlet 时必须选择不相交的分组，避免同一条目挂载两次。分组不提供发布者身份或授权保证，也不改变注册、scope 和销毁的生命周期。
 
 ## 组件输入
 

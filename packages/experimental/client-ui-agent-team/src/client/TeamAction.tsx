@@ -177,7 +177,7 @@ function TaskCard({ task, t }: { task: TeamTask; t: TranslateNS<typeof NS> }) {
 
 /** Render the Team roster and read-only task board. */
 export function TeamAction({
-  sessionId, useSession, useSessions, useSessionStatus, openTeammate, t,
+  sessionId, useSession, useSessions, useSessionStatus, openTeammate, t, communityWeb = false,
 }: TeamActionProps) {
   const [open, setOpen] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -277,6 +277,8 @@ export function TeamAction({
         aria-label={t('trigger')}
         aria-haspopup="dialog"
         aria-expanded={open}
+        data-community-header-control={communityWeb ? 'team' : undefined}
+        title={communityWeb ? t('trigger') : undefined}
         onClick={() => {
           cancelHoverChange()
           pinnedRef.current = true
@@ -284,8 +286,8 @@ export function TeamAction({
           else panelRef.current?.focus()
         }}
       >
-        <IconUsersOutlineRegular size={14} />
-        <span ref={triggerLabelRef} className={css.triggerLabel}>{t('trigger')}</span>
+        <IconUsersOutlineRegular size={communityWeb ? 20 : 14} />
+        <span ref={triggerLabelRef} className={css.triggerLabel} data-community-control-label={communityWeb ? '' : undefined}>{t('trigger')}</span>
       </button>
       {open && createPortal(
         <div

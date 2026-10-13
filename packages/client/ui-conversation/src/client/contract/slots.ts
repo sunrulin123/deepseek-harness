@@ -278,7 +278,9 @@ export interface HeroAgentPresetOwnerProps {
 
 /** Header actions derive their state from standard Session props. */
 export interface ConversationHeaderActionOwnerProps {
-  /** Marker field: entries receive no owner-specific values. */
+  /** Compact native presentation selected by the Community Web header only. */
+  communityWeb?: boolean
+  /** Header action entries receive no React children from their parent. */
   children?: never
 }
 
@@ -348,6 +350,8 @@ export interface ConversationSessionInjected {
 
 /** Business callbacks injected into the strict Session header. */
 export interface ConversationSessionHeaderInjected {
+  /** Browser startup selects the Community Web presentation; Electron keeps upstream chrome. */
+  readonly communityWeb?: boolean
   /** Package-owned View roster source bound only for the Conversation header. */
   readonly hooks: { readonly conversationViews: ObservableSnapshot<readonly ViewTab[]> }
   /** Select a Session through the Session Controller. */

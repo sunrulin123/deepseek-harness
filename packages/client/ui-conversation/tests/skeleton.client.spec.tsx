@@ -140,6 +140,9 @@ function mount(
     composerBlock?: { reason: string }
     /** Mutable view ledger used by registration-order regressions. */
     viewTabs?: ViewTab[]
+    /** Browser presentation with independently registered header entries. */
+    communityWeb?: boolean
+    headerEntries?: boolean
   } = {},
 ) {
   const sessionId = 'sessionId' in options ? options.sessionId : SID
@@ -192,8 +195,20 @@ function mount(
   /** Owner share handed to the two composer tool-row seats, per render. */
   const seatOwners: { key: string; owner: unknown }[] = []
   let pickerOwner: unknown
-  const renderSlot = ((key: string, owner: object, opts?: { only?: string; fallback?: ReactNode }) => {
+  const renderSlot = ((key: string, owner: object, opts?: {
+    only?: string
+    fallback?: ReactNode
+    group?: string
+    excludeGroups?: readonly string[]
+  }) => {
     slotCalls.push(key)
+    if (key === 'conversation.session.header.actions' && options.headerEntries === true) {
+      return <div data-slot={key}>
+        {(opts?.group === undefined || opts.group === 'native') && !opts?.excludeGroups?.includes('native') && <button>Native action</button>}
+        {opts?.group === undefined && !opts?.excludeGroups?.includes('status') && <span>Current mode</span>}
+        {opts?.group === undefined && <button>Extension action</button>}
+      </div>
+    }
     if (key === 'conversation.input.model' || key === 'conversation.input.plan') {
       seatOwners.push({ key, owner })
     }
@@ -208,6 +223,7 @@ function mount(
     if (key === 'conversation.session.header') {
       return (
         <ConversationSessionHeader
+          communityWeb={options.communityWeb ?? false}
           hideChrome={(owner as Pick<ConversationSessionHeaderSlotProps, 'hideChrome'>).hideChrome}
           sessionId={SID}
           SessionProvider={({ children }) => children}
@@ -398,6 +414,26 @@ describe('Hero chrome', () => {
 })
 
 describe('ConversationRoot resident composer', () => {
+  it('groups community actions separately, omits mode status, and preserves extension interaction', () => {
+    const b = mount(sessionSnapshotOf(), undefined, undefined, { communityWeb: true, headerEntries: true })
+    const native = b.view.getByRole('group', { name: '会话工具' })
+    expect(native.textContent).toBe('Native action')
+    expect(b.view.queryByText('Current mode')).toBeNull()
+    expect(b.view.queryByRole('button', { name: 'Extension action' })).toBeNull()
+    fireEvent.click(b.view.getByRole('button', { name: '插件' }))
+    expect(b.view.getAllByRole('button', { name: 'Extension action' })).toHaveLength(1)
+    fireEvent.click(b.view.getByRole('tab', { name: 'Trajectory' }))
+    expect(b.view.getByRole('tab', { name: 'Trajectory' }).getAttribute('aria-selected')).toBe('true')
+  })
+
+  it('keeps the default desktop header action list and mode status unchanged', () => {
+    const b = mount(sessionSnapshotOf(), undefined, undefined, { headerEntries: true })
+    expect(b.view.getByRole('button', { name: 'Native action' })).toBeDefined()
+    expect(b.view.getByRole('button', { name: 'Extension action' })).toBeDefined()
+    expect(b.view.getByText('Current mode')).toBeDefined()
+    expect(b.view.queryByRole('button', { name: '插件' })).toBeNull()
+  })
+
   it('keeps global header navigation without selecting a Session', () => {
     const b = mount(sessionSnapshotOf(), [], undefined, { sessionId: undefined })
     expect(b.view.container.querySelector('header')).not.toBeNull()

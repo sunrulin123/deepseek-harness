@@ -118,6 +118,10 @@ export interface RootStandardSourceContribution {
 export interface RenderOpts {
   entryKey?: string
   only?: string
+  /** Include one parent-defined list presentation group. */
+  group?: string
+  /** Exclude named groups while retaining ungrouped entries. */
+  excludeGroups?: readonly string[]
   fallback?: ReactNode
   /** Opaque occurrence context consumed only by function-valued injected Hooks. */
   hookContext?: unknown

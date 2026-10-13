@@ -1,0 +1,34 @@
+# Bilingual-pair consistency record for use.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/community/use.md
+/use-the-community-web-interface:
+  en: b3ce1a2951485783
+  zh: 110972cf73d3834f
+/use-the-community-web-interface/summary:
+  en: d91922f8db2b15d6
+  zh: 784a08b08d960dbd
+/use-the-community-web-interface/contents:
+  en: 8102927322efb73c
+  zh: 9cddf76d56b29cc3
+/use-the-community-web-interface/navigate-a-session:
+  en: d16fe5c48ae63884
+  zh: 50b43ed94a9f980f
+/use-the-community-web-interface/native-session-tools:
+  en: ec7cadb930e13d85
+  zh: e62cb822530fe356
+/use-the-community-web-interface/plugins-and-modes:
+  en: 63b7797b3b31a78e
+  zh: a9c6fd2c1b46080c
+/use-the-community-web-interface/read-and-compose:
+  en: 05c060800ae3fa35
+  zh: 20ee351a3dd7111a
+/use-the-community-web-interface/connection-and-recovery:
+  en: 2f1285798c848f70
+  zh: 08783e914d3ee476
+/use-the-community-web-interface/feedback:
+  en: f89950d51dba4844
+  zh: 98e89e70c28bd47d
+/use-the-community-web-interface/dev-note:
+  en: 3207bdca489deabb
+  zh: dfb3109d2f7fe9b8

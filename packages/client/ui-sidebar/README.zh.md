@@ -27,6 +27,8 @@ dsh Web 客户端的侧边栏让用户识别当前构建、启动新会话、将
 <a id="use-this-package"></a>
 ## 使用本包
 
+在[社区 Web 展示](../../../docs/community/develop.zh.md#desktop-and-browser-selection)下，框架在窄屏复用 `HeaderLeadingControls`，使用 44px 触摸控件及原侧栏、新会话操作。侧栏覆盖层由框架负责；本包不创建第二套导航栏，也不改变 Desktop 标题栏控件。
+
 侧边栏是导航外壳：用户看到品牌、启动新会话、折叠轨道并到达 Settings。功能插件填充它的席位——ui-workspace 填充 `sidebar.workspaces`，ui-settings 在 `sidebar.settings` 注册触发行与设置面板。
 
 ### 品牌与 New Session

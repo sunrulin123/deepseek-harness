@@ -44,6 +44,8 @@ Target packages declaration-merge their snapshot and Location data maps, then re
 <a id="shell-and-standard-props"></a>
 ## Shell and standard props
 
+The Community browser entry selects a grouped header presentation: `native` action entries remain beside the View tabs, ungrouped extensions appear in Plugins, and `status` entries are omitted from the header. Header utilities remain independent and sit beside the title on narrow screens. Plugins uses a labeled icon on narrow screens and text on wider screens. Collapsing Plugins preserves each extension's mounted state; empty rendered content removes its trigger. The packaged Desktop entry retains the original unfiltered header. Action owners still provide counts, subscriptions, and interactions.
+
 The shared image slot props keep display choices separate from durable references: `thumbnail` requests a contained attachment-list thumbnail, while `compact` requests a cropped gallery tile. An optional per-image `label` supplies the accessible display name; loading and cache identity still use the original attachment reference. [ui-attachment](../ui-attachment/README.md) owns rendering and the lightbox.
 
 The composer measures its expanded control groups after size, content, visibility, or font-loading changes. If they cannot share a line, the row sets `--dsh-composer-model-text-display: none` and `--dsh-composer-model-icon-display: block` for the model seat; their defaults are `block` and `none`. Wrapping remains available if even the icon cannot fit.

@@ -261,6 +261,10 @@ export type PropsRuntime<
 export interface RenderOpts<EntryKey extends string = string> {
   entryKey?: EntryKey
   only?: string
+  /** Include only this presentation group in a list; omission keeps every group. */
+  group?: string
+  /** Omit these list presentation groups, retaining ungrouped extensions. */
+  excludeGroups?: readonly string[]
   fallback?: ReactNode
   /** Type-erased runtime seat; PropsRenderSlots narrows or removes it per slot declaration. */
   hookContext?: unknown
@@ -759,7 +763,7 @@ export type SlotLabel = string | (() => string)
 
 /**
  * Kind shape fields carried in register options (keyed dispatch key; list
- * id/order/label; chain select/priority; non-chain priority = cell shadowing rank).
+ * id/order/label/group; chain select/priority; non-chain priority = cell shadowing rank).
  */
 export type KindOptions<
   K extends keyof SlotMap & string,
@@ -775,6 +779,8 @@ export type KindOptions<
       id: string
       order?: number
       label?: SlotLabel
+      /** Parent-defined presentation group; not package ownership or authorization. */
+      group?: string
       /** Cell shadowing rank (ascending, default 0, lowest renders; same id + same priority throws — see {@link SlotCore.register}). */
       priority?: number
     }
@@ -840,7 +846,7 @@ type BaseOptions<
  */
 export interface StoredEntry {
   component: unknown
-  options: { key?: string; id?: string; order?: number; label?: SlotLabel; priority?: number }
+  options: { key?: string; id?: string; order?: number; label?: SlotLabel; group?: string; priority?: number }
   /** Chain routing selector (type-erased like `inject`; present exactly on chain-slot entries). */
   select?: ((owner: never) => unknown) | undefined
   /** Registrant business face; positional params derive from the declaration (sessionId?, actions?). */
@@ -878,6 +884,7 @@ interface ErasedOptions {
   id?: string | undefined
   order?: number | undefined
   label?: SlotLabel | undefined
+  group?: string | undefined
   select?: ((owner: never) => unknown) | undefined
   priority?: number | undefined
   children?: Record<string, SlotSpec<SlotEntryDef>> | undefined
@@ -1265,6 +1272,7 @@ export class SlotCore {
         ...(options.id !== undefined ? { id: options.id } : {}),
         ...(options.order !== undefined ? { order: options.order } : {}),
         ...(options.label !== undefined ? { label: options.label } : {}),
+        ...(options.group !== undefined ? { group: options.group } : {}),
         ...(options.priority !== undefined ? { priority: options.priority } : {}),
       },
       ...(options.select !== undefined ? { select: options.select } : {}),

@@ -25,6 +25,8 @@ Choose permission presets for the current Web session or future sessions. Genera
 <a id="use-this-package"></a>
 ## Use this package
 
+In the [community Web presentation](../../../docs/community/develop.md#desktop-and-browser-selection), the narrow-screen composer trigger uses a 44px neutral container, a 20px permission glyph, and its existing disclosure arrow. The selected preset still determines the glyph, including Full access warning semantics; the styling does not change selection, confirmation, or permission policy. Desktop retains the original control styling.
+
 Mount this plugin alongside the settings, commands, and conversation packages. General settings receives the future-default row; the composer receives the `conversation.input.permission` control, and bare `/permission` opens the slash picker. Current-session controls require both the Session projection and a complete catalog snapshot. A permission-less composition exposes neither current-session controls nor the Settings row.
 
 ### The picker

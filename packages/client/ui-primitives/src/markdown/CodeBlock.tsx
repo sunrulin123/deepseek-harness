@@ -154,7 +154,7 @@ export function CodeBlock({
     [streaming, highlighting, streamedBody, trimmed, lang, loaded],
   )
   const [copied, setCopied] = useState(false)
-  const [localWrapped, setWrapped] = useState(true)
+  const [localWrapped, setWrapped] = useState(() => document.documentElement.dataset.communityWebUi !== 'true')
   const wrapped = wrap ?? localWrapped
 
   const onCopy = useCallback(() => {

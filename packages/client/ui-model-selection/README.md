@@ -27,6 +27,8 @@ The Web GUI lets users switch the model and reasoning effort for an existing ses
 <a id="use-this-package"></a>
 ## Use this package
 
+In the [community Web presentation](../../../docs/community/develop.md#desktop-and-browser-selection), the narrow-screen trigger shares the permission control’s 44px height and neutral container, shows the existing 20px model icon, and bounds its label within the composer. The existing compact-label behavior and accessible full selection remain available; the menu and model-routing behavior are unchanged. Desktop retains the original trigger styling.
+
 DeepSeek account and API-key routes appear as separate provider groups, each exposing the same configured model catalog.
 
 The unselected model label uses the same regular weight as an available model name and retains the saved reasoning effort caption for existing and new sessions; effort editing requires an available model. Clicking the unselected trigger opens the model list directly; Escape closes it.

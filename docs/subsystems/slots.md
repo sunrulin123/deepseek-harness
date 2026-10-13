@@ -43,6 +43,7 @@ export function apply(ctx: Context): void {
 }
 ```
 
+<a id="cardinality-and-scope"></a>
 ## Cardinality and scope
 
 The slot declaration fixes two independent axes.
@@ -58,6 +59,8 @@ The slot declaration fixes two independent axes.
 | scope | `session` | Requires a resolved surrounding Provider binding and receives definite Session values. |
 
 `priority` is a shadowing rank for `single`, `list`, and `keyed` cells and an election order for `chain`. Lower values run or render first. Ordinary additive contributions should choose a fresh list `id` or keyed `key`; intentionally reusing a shipped cell replaces its presentation.
+
+For list slots, registration `group` is optional presentation metadata defined by the parent. `renderSlot` accepts `group` to select one exact group and `excludeGroups` to remove named groups while retaining ungrouped entries; both combine with `only` by intersection after priority winners and ordering are resolved. An empty filtered list renders `fallback`. No filter preserves the full list. A parent rendering several outlets must select disjoint groups to avoid mounting an entry twice. Groups do not establish publisher identity or authorization, and they do not alter registration, scope, or disposal lifetimes.
 
 ## Component inputs
 

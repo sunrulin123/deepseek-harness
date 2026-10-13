@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEve
 import type { JobsSnapshot, JobView, ObservedJob } from '@deepseek-ai/dsh-api-job-controller/client'
 import type { SessionId } from '@deepseek-ai/dsh-session/types'
 import {
-  IconChevronDownOutlineRegular, IconStopFillRegular, StateDot, TerminalBlock, useDismissOnOutsidePointer,
+  IconChevronDownOutlineRegular, IconFlatListOutlineRegular, IconStopFillRegular, StateDot, TerminalBlock, useDismissOnOutsidePointer,
   type StateDotState, type TerminalBlockLabels,
 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { InjectFace, PropsLocale, PropsRuntime, TranslateNS } from '@deepseek-ai/dsh-client-ui-slots'
@@ -322,7 +322,7 @@ function JobItem({ job, view, expanded, now, onToggle, kill, t }: {
  *   observation, and kill controls, and the namespace translator.
  * @returns the trigger and its popover list, or null when there is nothing to show.
  */
-export function JobListAction({ sessionId, useJobs, watchRows, observe, killJob, t }: JobListActionProps) {
+export function JobListAction({ sessionId, useJobs, watchRows, observe, killJob, t, communityWeb = false }: JobListActionProps) {
   const jobs = useJobs(state => state.rows[sessionId]) ?? NO_JOBS
   const observedViews = useJobs(state => state.observed)
   const [open, setOpen] = useState(false)
@@ -512,6 +512,8 @@ export function JobListAction({ sessionId, useJobs, watchRows, observe, killJob,
         className={css.trigger}
         aria-expanded={open}
         aria-label={countLabel}
+        title={communityWeb ? countLabel : undefined}
+        data-community-header-control={communityWeb ? 'jobs' : undefined}
         onClick={() => {
           // Sample the clock in the same commit that opens the list: the
           // mount-time value predates every job, so the first painted frame
@@ -522,7 +524,13 @@ export function JobListAction({ sessionId, useJobs, watchRows, observe, killJob,
         }}
       >
         {liveRows.length > 0 ? <StateDot state="ongoing" className={css.triggerDot} /> : null}
-        <span className={css.count}>{countLabel}</span>
+        {communityWeb
+          ? <>
+            <IconFlatListOutlineRegular size={20} />
+            <span data-community-control-label="">{t('list.aria')}</span>
+            {liveRows.length > 0 && <span data-community-control-count="">{liveRows.length}</span>}
+          </>
+          : <span className={css.count}>{countLabel}</span>}
         <IconChevronDownOutlineRegular size={12} className={open ? css.triggerOpen : undefined} />
       </button>
       {open

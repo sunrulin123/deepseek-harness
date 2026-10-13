@@ -37,6 +37,7 @@ export function apply(ctx: ClientContext): void {
     () => ctx.slots.register({
       name: 'conversation.session.header.actions',
       id: 'job-list',
+      group: 'native',
       // Background work follows the preset label in the header actions band.
       order: 20,
       locale: NS,

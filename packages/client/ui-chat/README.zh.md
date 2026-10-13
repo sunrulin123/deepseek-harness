@@ -33,6 +33,8 @@ kind: "package-reference"
 <a id="reference-previews"></a>
 ## 引用预览
 
+在[社区 Web 展示](../../../docs/community/develop.zh.md#desktop-and-browser-selection)下，窄屏 assistant 内容的块间距为 12px，消息操作前的间距为 8px。这些间距不改变 transcript（文本记录）顺序及流、用量和滚动的归属。Desktop 保留原间距。
+
 Chat 在节点列表外通过一个 `MarkdownDelegateProvider` 提供文件及 HTTP(S) 导航。Assistant Markdown 文件链接在消息落定后可于右侧栏打开，包括未修改文件的引用。相对路径基于当前查看的 Session 工作区解析；绝对路径仍使用同一 Session 的文件系统访问。`#L24` 和 `#L24-L30` 定位到指定起始行，并复用现有文件标签。文件缺失时显示预览错误状态。
 
 独立的 Markdown 图片以内嵌预览显示，点击打开共享图片浮层；本地路径在消息落定后基于当前查看的工作区解析。图片文件链接保持点击打开侧栏，鼠标停留或键盘聚焦时显示缩略图，Esc 关闭缩略图。图片加载失败时保留本地化状态与图片说明；不执行重复图片过滤。

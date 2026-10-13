@@ -25,6 +25,8 @@ kind: "package-reference"
 <a id="use-this-package"></a>
 ## 使用本包
 
+在[社区 Web 展示](../../../docs/community/develop.zh.md#desktop-and-browser-selection)下，窄屏输入区入口使用 44px 中性容器、20px 权限图标及原下拉箭头。图标仍由所选预设决定，包括完全权限的警告语义；样式不改变选择、确认或权限策略。Desktop 保留原控件样式。
+
 将本插件与 settings、commands 和 conversation 包一同挂载。通用设置获得未来默认值行；composer 获得 `conversation.input.permission` 控件，裸 `/permission` 打开 slash 选择器。当前会话控件同时要求 Session 投影和完整目录快照。不提供权限功能的装配既不公开当前会话控件，也不公开设置行。
 
 ### 选择器

@@ -53,6 +53,22 @@ function openList(): void {
 }
 
 describe('JobListAction visibility', () => {
+  it('keeps community counts limited to running and stopping jobs and retains settled history', () => {
+    const running = job()
+    const stopping = job({ id: 'bash-2' as JobView['id'], status: 'stopping' })
+    const completed = outputJob({ id: 'bash-3' as JobView['id'], status: 'completed', finishedAt: 1_700_000_003_000 })
+    const view = render(<JobListAction {...props([running, stopping, completed])} communityWeb />)
+    const trigger = view.getByRole('button', { name: '2 个后台任务运行中' })
+    expect(trigger.textContent).toBe('后台任务2')
+    fireEvent.click(trigger)
+    expect(view.getByRole('list', { name: '后台任务' })).toBeDefined()
+    view.rerender(<JobListAction {...props([completed])} communityWeb />)
+    const settledTrigger = view.getByRole('button', { name: '1 个后台任务' })
+    expect(settledTrigger.textContent).toBe('后台任务')
+    view.rerender(<JobListAction {...props([])} communityWeb />)
+    expect(view.container.innerHTML).toBe('')
+  })
+
   it('renders nothing while the session sees no jobs', () => {
     const { container } = render(<JobListAction {...props([])} />)
     expect(container.innerHTML).toBe('')

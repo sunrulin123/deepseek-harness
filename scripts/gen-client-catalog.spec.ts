@@ -117,7 +117,10 @@ describe('client slot projection', () => {
     )
     expect(entry?.replaceRisk).toBe('none')
     expect(entry?.occupants).toEqual(["client-demo DemoSeat id 'shipped'"])
-    expect(entry?.registerOptions.map(option => option.name)).toEqual(['id', 'order', 'label'])
+    expect(entry?.registerOptions.map(option => option.name)).toEqual(['id', 'order', 'label', 'group'])
+    const group = entry?.registerOptions.find(option => option.name === 'group')
+    expect(group).toMatchObject({ requirement: 'optional', type: 'string' })
+    expect(group?.doc).toContain('not package ownership or authorization')
   })
 
   it('names the entry whose mount makes a child seat exist', () => {

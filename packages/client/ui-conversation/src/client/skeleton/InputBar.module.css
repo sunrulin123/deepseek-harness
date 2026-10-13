@@ -416,3 +416,63 @@
 .activity { display: flex; align-items: center; flex: none; }
 .activity:empty { display: none; }
 .activityExpanded { flex: 1; min-width: 0; }
+
+@media (max-width: 767px), (any-pointer: coarse) and (max-width: 1023px) {
+  :global(html[data-community-web-ui='true']) .root {
+    padding: 0 12px max(4px, env(safe-area-inset-bottom));
+  }
+
+  :global(html[data-community-web-ui='true']) .card {
+    gap: 4px;
+    border-radius: var(--dsw-radius-xl);
+    --dsh-composer-text-max-height: min(200px, 30dvh);
+  }
+
+  :global(html[data-community-web-ui='true']) .input {
+    min-height: 40px;
+    padding: 4px 12px;
+    font-size: max(16px, var(--dsh-content-font-size, 14px));
+  }
+
+  :global(html[data-community-web-ui='true']) .placeholder {
+    inset: 4px 12px auto;
+    font-size: max(16px, var(--dsh-content-font-size, 14px));
+  }
+
+  :global(html[data-community-web-ui='true']) .row {
+    gap: 4px;
+    padding: 4px 8px 8px;
+  }
+
+  :global(html[data-community-web-ui='true']) :is(.tools, .modes, .trailing, .standardControls) {
+    gap: 4px;
+  }
+
+  :global(html[data-community-web-ui='true']) .trailing {
+    min-width: 0;
+  }
+
+  :global(html[data-community-web-ui='true']) :is(.add, .primary) {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    transform: none;
+  }
+
+  :global(html[data-community-web-ui='true']) .add {
+    border-radius: var(--dsw-radius-md);
+    background: var(--dsw-specific-selector);
+    color: var(--dsw-alias-label-secondary);
+  }
+
+  :global(html[data-community-web-ui='true']) :is(.add, .primary) svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  :global(html[data-community-web-ui='true']) .dock {
+    gap: 8px;
+    min-height: 28px;
+    font-variant-numeric: tabular-nums;
+  }
+}

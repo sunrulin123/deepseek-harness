@@ -1218,9 +1218,15 @@ function renderOutletContent(
   // silently drop its row). Row sequence: registration order refined by
   // explicit order, optional id filter, as before shadowing existed.
   const winners = host.entriesOfSlot(slotKey)
-  const rows: { entry: StoredEntry | undefined; id: string | undefined; order: number }[] = winners.map(entry => ({
+  const rows: {
+    entry: StoredEntry | undefined
+    id: string | undefined
+    group: string | undefined
+    order: number
+  }[] = winners.map(entry => ({
     entry,
     id: entry.options.id,
+    group: entry.options.group,
     order: entry.options.order ?? 0,
   }))
   const rowIds = new Set(rows.map(row => row.id))
@@ -1228,10 +1234,12 @@ function renderOutletContent(
     if (rowIds.has(entry.options.id)) continue
     rowIds.add(entry.options.id)
     // Dry cells anchor their row at the cell head's declared order.
-    rows.push({ entry: undefined, id: entry.options.id, order: entry.options.order ?? 0 })
+    rows.push({ entry: undefined, id: entry.options.id, group: entry.options.group, order: entry.options.order ?? 0 })
   }
   let list = [...rows].sort((a, b) => a.order - b.order)
   if (opts?.only !== undefined) list = list.filter(item => item.id === opts.only)
+  if (opts?.group !== undefined) list = list.filter(item => item.group === opts.group)
+  if (opts?.excludeGroups !== undefined) list = list.filter(item => item.group === undefined || !opts.excludeGroups?.includes(item.group))
   if (list.length === 0) return <>{opts?.fallback ?? null}</>
   // Winner rows key by entry identity (see entryKeyOf); dry-cell rows key by
   // id — the disjoint prefixes keep the two namespaces from colliding.

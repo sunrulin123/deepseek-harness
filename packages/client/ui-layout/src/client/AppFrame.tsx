@@ -16,6 +16,7 @@
  */
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
+import { focusWithoutRing, useModalLayer } from '@deepseek-ai/dsh-client-ui-primitives'
 import type {
   PropsLocale, PropsRenderSlots, PropsRuntime, PropsStore,
 } from '@deepseek-ai/dsh-client-ui-slots'
@@ -32,8 +33,8 @@ export type AppFrameProps =
   & PropsLocale<'common'>
 
 /** Center column grid item (session-body building block). */
-function CenterColumn(props: { children?: ReactNode }) {
-  return <div className={css.centerCol}>{props.children}</div>
+function CenterColumn(props: { children?: ReactNode; covered: boolean }) {
+  return <div className={css.centerCol} {...(props.covered ? { inert: '' } : {})}>{props.children}</div>
 }
 
 /** Subscribe to the main key without subscribing the column frame to each panel id. */
@@ -47,8 +48,8 @@ function MainPanel({ usePanelInfo, renderSlot }: Pick<PropsRuntime<'root'>, 'use
  * occupant's panel is positioned against the column's right edge, which never
  * moves, so it can hang over the centre when there is no track.
  */
-function RightbarColumn(props: { children?: ReactNode }) {
-  return <div className={css.rightbarCol} data-rightbar-col>{props.children}</div>
+function RightbarColumn(props: { children?: ReactNode; covered: boolean }) {
+  return <div className={css.rightbarCol} data-rightbar-col {...(props.covered ? { inert: '' } : {})}>{props.children}</div>
 }
 
 /**
@@ -128,7 +129,42 @@ export function AppFrame({
 }: AppFrameProps) {
   const layoutInfo = useStore(state => state.layoutInfo)
   const frameRef = useRef<HTMLDivElement | null>(null)
+  const sidebarRef = useRef<HTMLDivElement | null>(null)
+  const sidebarInvoker = useRef<HTMLElement | null>(null)
+  const wasSidebarOverlay = useRef(false)
   const viewport = layoutInfo.viewportWidth
+  const communityWeb = document.documentElement.dataset.communityWebUi === 'true'
+  const mobileWeb = communityWeb && (viewport < 768 || (viewport < 1024 && window.matchMedia('(any-pointer: coarse)').matches))
+
+  // Keyboard geometry is local presentation state, independent of sessions and transport.
+  useLayoutEffect(() => {
+    const frame = frameRef.current
+    const visual = window.visualViewport
+    if (!mobileWeb || frame === null || !visual) return
+    let raf: number | null = null
+    const measure = () => {
+      if (visual.scale !== 1) {
+        frame.style.removeProperty('--community-viewport-height')
+        frame.style.removeProperty('--community-viewport-top')
+        return
+      }
+      frame.style.setProperty('--community-viewport-height', `${visual.height}px`)
+      frame.style.setProperty('--community-viewport-top', `${visual.offsetTop}px`)
+    }
+    const schedule = () => {
+      raf ??= requestAnimationFrame(() => { raf = null; measure() })
+    }
+    measure()
+    visual.addEventListener('resize', schedule)
+    visual.addEventListener('scroll', schedule)
+    return () => {
+      visual.removeEventListener('resize', schedule)
+      visual.removeEventListener('scroll', schedule)
+      if (raf !== null) cancelAnimationFrame(raf)
+      frame.style.removeProperty('--community-viewport-height')
+      frame.style.removeProperty('--community-viewport-top')
+    }
+  }, [mobileWeb])
 
   // Track the frame's own box (not the window): rAF-throttled ResizeObserver.
   useLayoutEffect(() => {
@@ -159,6 +195,15 @@ export function AppFrame({
 
   const narrow = viewport < SIDEBAR_AUTO_COLLAPSE
   const sidebarCollapsed = narrow ? !layoutInfo.narrowExpanded : layoutInfo.sidebar === 0
+  const sidebarOverlay = mobileWeb && !sidebarCollapsed
+  useModalLayer(sidebarRef, sidebarOverlay, actions.toggleSidebar)
+  useLayoutEffect(() => {
+    // The leading seat becomes visible in this commit, after modal cleanup.
+    if (wasSidebarOverlay.current && !sidebarOverlay && sidebarInvoker.current?.isConnected) {
+      focusWithoutRing(sidebarInvoker.current)
+    }
+    wasSidebarOverlay.current = sidebarOverlay
+  }, [sidebarOverlay])
   const sidebarPreference = sidebarCollapsed
     ? 0
     : layoutInfo.sidebar === 0 ? SIDEBAR_DEFAULT : layoutInfo.sidebar
@@ -166,12 +211,16 @@ export function AppFrame({
   // Desktop reopen controls occupy the frame's shell.leading seat (macOS) or
   // the Windows caption row; neither platform keeps an icon rail.
   const darwin = document.documentElement.dataset.platform === 'darwin'
-  const collapsedWidth = darwin
+  const collapsedWidth = mobileWeb || darwin
     || document.documentElement.hasAttribute('data-windows-titlebar') ? 0 : SIDEBAR_COLLAPSED
   // Opening on a narrow frame collapses the left sidebar. Eligibility must
   // include that space before the occupant's first shown report arrives.
-  const normal = computeColumns(viewport, !layoutInfo.rightbarShown && narrow ? 0 : sidebarPreference, rightbarPreference, collapsedWidth)
-  const cols = computeColumns(viewport, sidebarPreference, layoutInfo.rightbarTrack ? rightbarPreference : 0, collapsedWidth)
+  const normalSidebar = !layoutInfo.rightbarShown && narrow ? 0 : sidebarPreference
+  const normal = computeColumns(viewport, normalSidebar, rightbarPreference, collapsedWidth)
+  const cols = computeColumns(
+    viewport, mobileWeb ? 0 : sidebarPreference, layoutInfo.rightbarTrack ? rightbarPreference : 0, collapsedWidth,
+  )
+  const sidebarWidth = mobileWeb && !sidebarCollapsed ? Math.min(sidebarPreference, viewport - 44) : cols.sidebar
   const colsRef = useRef(cols)
   colsRef.current = cols
   const rightbarWidth = useRef(normal.rightbar)
@@ -241,8 +290,8 @@ export function AppFrame({
   const rightbarMax = cols.rightbar === 0 ? 0 : clampWidth(rightbarPreference, RIGHTBAR_MIN, viewport * RIGHTBAR_MAX_RATIO)
   const sidebar = useMemo(() => renderSlot('sidebar', {
     collapsed: sidebarCollapsed,
-    width: cols.sidebar,
-  }), [renderSlot, sidebarCollapsed, cols.sidebar])
+    width: sidebarWidth,
+  }), [renderSlot, sidebarCollapsed, sidebarWidth])
   const main = useMemo(() => (
     <MainPanel usePanelInfo={usePanelInfo} renderSlot={renderSlot} />
   ), [usePanelInfo, renderSlot])
@@ -253,7 +302,7 @@ export function AppFrame({
   // row (ui-sidebar). AppFrame.module.css publishes the matching
   // --dsh-frame-leading-clearance under the same collapsed condition.
   const leading = useMemo(() => renderSlot('shell.leading', {}), [renderSlot])
-  const leadingMounted = darwin && sidebarCollapsed
+  const leadingMounted = mobileWeb || (darwin && sidebarCollapsed)
 
   return (
     <div
@@ -266,6 +315,7 @@ export function AppFrame({
           `${cols.sidebar}px minmax(${cols.rightbar === 0 ? 0 : CENTER_MIN}px, 1fr) minmax(0px, ${rightbarMax}px)`,
       }}
       data-sidebar-collapsed={sidebarCollapsed || undefined}
+      data-mobile-web={mobileWeb || undefined}
       data-rightbar-collapsed={cols.rightbar === 0 || undefined}
       data-rightbar-fullscreen={layoutInfo.rightbarFullscreen || undefined}
       data-rightbar-instant={layoutInfo.rightbarInstant || undefined}
@@ -277,12 +327,23 @@ export function AppFrame({
         useSessions={useSessions}
         usePanelInfo={usePanelInfo}
       />
-      <div className={css.sidebarCol}>
+      {sidebarOverlay && (
+        <button className={css.sidebarBackdrop} aria-label={t('close')} tabIndex={-1} onClick={actions.toggleSidebar} />
+      )}
+      <div
+        ref={sidebarRef}
+        className={css.sidebarCol}
+        style={mobileWeb ? { width: sidebarWidth } : undefined}
+        role={sidebarOverlay ? 'dialog' : undefined}
+        aria-modal={sidebarOverlay || undefined}
+        aria-label={sidebarOverlay ? t('navigation') : undefined}
+        tabIndex={sidebarOverlay ? -1 : undefined}
+      >
         {sidebar}
       </div>
       <>
-        <CenterColumn>{main}</CenterColumn>
-        <RightbarColumn>
+        <CenterColumn covered={sidebarOverlay}>{main}</CenterColumn>
+        <RightbarColumn covered={sidebarOverlay}>
           {renderSlot('rightbar', { width: normal.rightbar, viewportWidth: viewport, canShow: normal.rightbar > 0 })}
         </RightbarColumn>
       </>
@@ -290,12 +351,17 @@ export function AppFrame({
         {overlays}
       </div>
       {leadingMounted && (
-        <div className={css.leadingSeat} data-shell-leading>
+        <div
+          className={css.leadingSeat}
+          data-shell-leading
+          hidden={sidebarOverlay}
+          onFocusCapture={(event) => { sidebarInvoker.current = event.target }}
+        >
           {leading}
         </div>
       )}
       {/* The collapsed rail is fixed-width: no resize handle while closed. */}
-      {!sidebarCollapsed && <DragHandle side="sidebar" left={cols.sidebar} onStart={onSidebarStart} onDrag={onSidebarDrag} onEnd={onDragEnd} />}
+      {!sidebarCollapsed && !mobileWeb && <DragHandle side="sidebar" left={cols.sidebar} onStart={onSidebarStart} onDrag={onSidebarDrag} onEnd={onDragEnd} />}
       {layoutInfo.rightbarShown && !layoutInfo.rightbarFullscreen && normal.rightbar > 0 && (
         <DragHandle side="rightbar" left={viewport - normal.rightbar} onStart={onRightbarStart} onDrag={onRightbarDrag} onEnd={onDragEnd} />
       )}

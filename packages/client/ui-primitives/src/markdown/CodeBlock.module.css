@@ -143,3 +143,22 @@
   content: counter(source-line);
   user-select: none;
 }
+
+@media (max-width: 767px), (any-pointer: coarse) and (max-width: 1023px) {
+  :global(html[data-community-web-ui='true']) .block {
+    min-width: 0;
+    max-width: 100%;
+    margin: 8px 0;
+    --dsl-code-block-border-radius: var(--dsw-radius-md);
+  }
+
+  :global(html[data-community-web-ui='true']) .block :where(pre) {
+    padding: 12px;
+  }
+
+  :global(html[data-community-web-ui='true']) .block:not([data-code-wrap='true']) :where(pre) {
+    white-space: pre;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+}

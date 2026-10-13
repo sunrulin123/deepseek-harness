@@ -1,0 +1,34 @@
+# Bilingual-pair consistency record for install.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/community/install.md
+/install-the-community-web-edition:
+  en: 1c05ffa0a2961f33
+  zh: af845e7bfedc8370
+/install-the-community-web-edition/summary:
+  en: fd2e7dc391d1278b
+  zh: 58792b3a5a455bbe
+/install-the-community-web-edition/contents:
+  en: 77c2b5480818a4d6
+  zh: fd6e71c80e560786
+/install-the-community-web-edition/prepare:
+  en: 5b24a70af72f0268
+  zh: 5be3c5a13e26ca6d
+/install-the-community-web-edition/build-and-start:
+  en: 1d0d5960a8770ac4
+  zh: 069c6c84b123aa78
+/install-the-community-web-edition/use-another-device:
+  en: c278482430fa70df
+  zh: b586ae778a54a974
+/install-the-community-web-edition/update-and-return-to-upstream:
+  en: 5cc81153dc813db8
+  zh: 2360977ba30a30fc
+/install-the-community-web-edition/troubleshooting:
+  en: cde05d09bbd97493
+  zh: 0b0b7e8e5d5c4f09
+/install-the-community-web-edition/feedback:
+  en: ad7476e42b17d5aa
+  zh: dd36e55f8a61b490
+/install-the-community-web-edition/dev-note:
+  en: bb4d0268ec315946
+  zh: 8dad207d4a706dbe

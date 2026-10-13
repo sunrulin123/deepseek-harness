@@ -40,6 +40,8 @@ kind: "package-reference"
 <a id="understand-the-implementation"></a>
 ## 理解实现
 
+List outlet 遵循注册表的可选展示分组筛选，保留原生排序、响应式注册更新和销毁行为。[Slots 参考](../../../docs/subsystems/slots.zh.md#cardinality-and-scope)定义筛选规则；功能组件不检查 React 内部结构，也不搬移其他条目的 DOM 节点。
+
 <details>
 <summary>实现细节——点击展开</summary>
 

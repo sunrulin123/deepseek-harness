@@ -13,10 +13,22 @@ function CodeBlock(props: Omit<ComponentProps<typeof LocalizedCodeBlock>, 'copyL
   return <LocalizedCodeBlock {...props} {...markdownLabels.code} />
 }
 
-afterEach(cleanup)
+afterEach(() => {
+  cleanup()
+  delete document.documentElement.dataset.communityWebUi
+})
 
 beforeEach(() => {
   vi.useRealTimers()
+})
+
+it('starts community Web code unwrapped while preserving the explicit wrap control', () => {
+  document.documentElement.dataset.communityWebUi = 'true'
+  const labels = { codeLabel: 'Code', wrapLabel: 'Wrap lines', unwrapLabel: 'Do not wrap lines' }
+  const { container } = render(<CodeBlock code="const example = 'a long line'" toolbarLabels={labels} />)
+  expect(container.querySelector('[data-code-wrap]')?.getAttribute('data-code-wrap')).toBe('false')
+  fireEvent.click(screen.getByRole('button', { name: 'Wrap lines' }))
+  expect(container.querySelector('[data-code-wrap]')?.getAttribute('data-code-wrap')).toBe('true')
 })
 
 describe('highlightToHtml', () => {

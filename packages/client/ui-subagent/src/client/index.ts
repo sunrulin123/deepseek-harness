@@ -84,6 +84,7 @@ export function apply(ctx: ClientContext): void {
     () => ctx.slots.register({
       name: 'conversation.session.header.actions',
       id: 'subagent-catalog',
+      group: 'native',
       // Leads the band, directly after the title crumbs: subagent lineage is
       // the title's own continuation, ahead of Team navigation (-20) and the
       // preset label (-10).

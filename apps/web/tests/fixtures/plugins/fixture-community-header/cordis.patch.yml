@@ -1,0 +1,3 @@
+- insert:
+    - id: fixture-community-header
+      name: '@fixture/community-header'

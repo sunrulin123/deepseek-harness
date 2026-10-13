@@ -15,6 +15,10 @@ const reportFailure = (reason: unknown): void => {
 }
 
 try {
+  // The official preload selects Desktop presentation before client modules mount.
+  // This attribute controls presentation only; authentication uses the existing transport.
+  if (desktop === undefined) document.documentElement.dataset.communityWebUi = 'true'
+  else delete document.documentElement.dataset.communityWebUi
   const el = document.getElementById('root')
   if (el === null) throw new Error('web app: missing #root')
   const entry = new AppWebEntry(el)

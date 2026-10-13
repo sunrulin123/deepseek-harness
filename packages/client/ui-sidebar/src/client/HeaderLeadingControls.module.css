@@ -27,3 +27,17 @@
 .iconButton:hover {
   background: var(--dsw-alias-interactive-bg-hover);
 }
+
+:global([data-mobile-web]) .controls {
+  gap: 4px;
+}
+
+:global([data-mobile-web]) .iconButton {
+  width: 44px;
+  height: 44px;
+}
+
+:global([data-mobile-web]) .iconButton svg {
+  width: 20px;
+  height: 20px;
+}

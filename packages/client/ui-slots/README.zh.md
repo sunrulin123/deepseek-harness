@@ -27,6 +27,10 @@ kind: "package-library"
 
 编写客户端插件时都通过本包组合 UI：把组件注册进父级已声明的 slot，或声明组件将要渲染的子 slot。四种 kind 覆盖组合形态——`single`（单个占位者）、`list`（有序条目）、`keyed`（按键分派）与 `chain`（条目自行提名）。
 
+### List 展示分组
+
+List 注册项可声明由父组件定义的可选 `group`。父组件通过 `renderSlot(..., { group })` 渲染指定分组，或用 `excludeGroups` 排除指定分组；后者仍保留未分组条目。这些展示筛选既不授予权限，也不标识包发布者。不提供筛选时，所有条目保持原有排序与渲染行为。与 `only`、priority 和 fallback 的组合规则见 [Slots](../../../docs/subsystems/slots.zh.md#cardinality-and-scope)。
+
 ### 可复用 Component Factory
 
 当一个包定义装配、而互不相关的 parents 需要独立渲染它时，使用 Component Factory。在 `SlotFactoryMap` 中声明完整类型，通过 `ctx.slots.registerFactory()` 安装 definition，通过注入的 `renderFactorySlot()` 渲染 occurrences，并通过调用的 `slots` 选项选择每个已声明的局部 Component。definition 通过 `useFactorySlot(name, fallback)` 读取该选择。

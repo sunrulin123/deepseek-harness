@@ -76,3 +76,17 @@
   /* Optical align with the 28px action hit targets. */
   margin-left: -6px;
 }
+
+@media (max-width: 767px), (any-pointer: coarse) and (max-width: 1023px) {
+  :global(html[data-community-web-ui='true']) .body {
+    gap: 12px;
+  }
+
+  :global(html[data-community-web-ui='true']) .body > [data-turn-process-inline][hidden] {
+    margin-bottom: -12px;
+  }
+
+  :global(html[data-community-web-ui='true']) .actions {
+    margin-top: 8px;
+  }
+}

@@ -55,6 +55,7 @@ export function registerAgentTeamUi(ctx: ClientContext): void {
     () => ctx.slots.register({
       name: 'conversation.session.header.actions',
       id: 'agent-team',
+      group: 'native',
       order: -20,
       locale: NS,
       inject: () => actions,

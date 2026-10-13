@@ -15,10 +15,12 @@ afterEach(() => {
   vi.clearAllMocks()
   vi.resetModules()
   document.body.replaceChildren()
+  delete document.documentElement.dataset.communityWebUi
 })
 
 it('forwards client initialization failures to native recovery', async () => {
   document.body.innerHTML = '<div id="root"></div>'
+  document.documentElement.dataset.communityWebUi = 'true'
   const gate = Promise.withResolvers<undefined>()
   const failed = vi.fn(async () => {})
   vi.stubGlobal('__DSH_BOOT_READY__', gate)
@@ -26,6 +28,7 @@ it('forwards client initialization failures to native recovery', async () => {
   vi.stubGlobal('__DSH_TRANSPORT__', undefined)
   await import('../src/main.ts')
   await gate.promise
+  expect(document.documentElement.dataset.communityWebUi).toBeUndefined()
   expect(boot.applyIndexInjections).toHaveBeenCalledWith([], expect.any(Function))
   const report = boot.run.mock.calls[0]![0] as (reason: unknown) => void
   report(new Error('client plugin activation failed'))
@@ -50,6 +53,7 @@ it('leaves browser failure presentation with the Web boot kernel', async () => {
   vi.stubGlobal('dshDesktopBoot', undefined)
   await import('../src/main.ts')
   expect(boot.run).toHaveBeenCalledWith(undefined)
+  expect(document.documentElement.dataset.communityWebUi).toBe('true')
 })
 
 it.each(['root', 'readiness'])('reports missing %s before client plugin startup', async (missing) => {

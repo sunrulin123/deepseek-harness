@@ -9,6 +9,7 @@
  */
 import { describe, expect, it, vi } from 'vitest'
 import { act, render } from '@testing-library/react'
+import { useEffect } from 'react'
 import {
   SlotCore, StaleAuthorizationError, type PropsRenderSlots, type SlotRendererHost,
   type SlotScopeAdapter, type StandardSourceBinding,
@@ -79,6 +80,52 @@ function mountFrame(core: SlotCore, body: (renderSlot: FrameSlots['renderSlot'])
 }
 
 describe('createSlotRenderer over the real SlotCore', () => {
+  it('partitions list presentation groups without duplicating entries and updates on disposal', async () => {
+    const core = new SlotCore()
+    const mounted = vi.fn()
+    const stopped = vi.fn()
+    const { view } = mountFrame(core, renderSlot => <>
+      <main>{renderSlot('spec.list', {}, { group: 'native' })}</main>
+      <aside>{renderSlot('spec.list', {}, { excludeGroups: ['native', 'status'] })}</aside>
+    </>)
+    function Extension() {
+      useEffect(() => { mounted(); return stopped }, [])
+      return <button>extension</button>
+    }
+    let disposeExtension = () => {}
+    await act(async () => {
+      core.register({ name: 'spec.list', id: 'job', group: 'native', order: 2 }, () => <button>job</button>)
+      core.register({ name: 'spec.list', id: 'child', group: 'native', order: 1 }, () => <button>child</button>)
+      core.register({ name: 'spec.list', id: 'mode', group: 'status' }, () => <span>mode</span>)
+      disposeExtension = core.register({ name: 'spec.list', id: 'extension' }, Extension)
+    })
+    expect(view.container.querySelector('main')?.textContent).toBe('childjob')
+    expect(view.container.querySelector('aside')?.textContent).toBe('extension')
+    expect(view.queryByText('mode')).toBeNull()
+    expect(mounted).toHaveBeenCalledTimes(1)
+    await act(async () => { disposeExtension() })
+    expect(view.container.querySelector('aside')?.textContent).toBe('')
+    expect(stopped).toHaveBeenCalledTimes(1)
+    expect(view.getByRole('button', { name: 'job' })).toBeDefined()
+  })
+
+  it('keeps unfiltered list rendering compatible and combines group, id, and fallback filters', async () => {
+    const core = new SlotCore()
+    const { view } = mountFrame(core, renderSlot => <>
+      <main>{renderSlot('spec.list', {})}</main>
+      <aside>{renderSlot('spec.list', {}, { group: 'native', only: 'missing', fallback: <i>empty</i> })}</aside>
+      <footer>{renderSlot('spec.list', {}, { group: 'native', excludeGroups: ['native'], fallback: <i>excluded</i> })}</footer>
+    </>)
+    await act(async () => {
+      core.register({ name: 'spec.list', id: 'job', group: 'native', order: 1 }, () => <span>job</span>)
+      core.register({ name: 'spec.list', id: 'mode', group: 'status', order: 2 }, () => <span>mode</span>)
+      core.register({ name: 'spec.list', id: 'extension', order: 3 }, () => <span>extension</span>)
+    })
+    expect(view.container.querySelector('main')?.textContent).toBe('jobmodeextension')
+    expect(view.container.querySelector('aside')?.textContent).toBe('empty')
+    expect(view.container.querySelector('footer')?.textContent).toBe('excluded')
+  })
+
   it('renders registrations live through real microtask batching: register, dispose back to fallback', async () => {
     const core = new SlotCore()
     const { view } = mountFrame(core, renderSlot =>

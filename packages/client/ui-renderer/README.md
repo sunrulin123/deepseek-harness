@@ -40,6 +40,8 @@ A business plugin registers an ordinary Slot entry or a reusable Component Facto
 <a id="understand-the-implementation"></a>
 ## Understand the implementation
 
+List outlets honor the registry's optional presentation group filters while preserving native ordering, reactive registration updates, and disposal. The [Slots reference](../../../docs/subsystems/slots.md#cardinality-and-scope) defines filtering; feature components do not inspect React internals or move another entry's DOM nodes.
+
 <details>
 <summary>Implementation internals — click to expand</summary>
 

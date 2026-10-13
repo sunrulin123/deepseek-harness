@@ -44,6 +44,8 @@ target package 通过 declaration merge 扩展 snapshot 与 Location data map，
 <a id="shell-and-standard-props"></a>
 ## Shell 与标准 props
 
+Community 浏览器入口使用分组顶部布局：`native` 操作条目保留在 View 标签旁，未分组扩展进入“插件”，`status` 条目不在顶部展示。顶部 utilities 独立保留，窄屏时位于标题旁。“插件”在窄屏使用带无障碍名称的图标，宽屏保留文字。收起“插件”会保留各扩展的挂载状态；实际渲染内容为空时移除其入口。打包的 Desktop 入口保留原有未筛选顶部。数量、订阅和交互仍由操作条目的拥有者提供。
+
 共享图片插槽属性将展示选择与持久化引用分开：`thumbnail` 请求完整缩放的附件列表缩略图，`compact` 请求裁剪的图片方块。每张图片可通过可选的 `label` 提供无障碍展示名称；加载和缓存标识仍使用原始附件引用。[ui-attachment](../ui-attachment/README.zh.md) 负责渲染与灯箱。
 
 控件组的尺寸、内容、可见性或字体加载状态变化后，composer 测量展开状态下的控件组。若无法排在同一行，控制栏为模型位设置 `--dsh-composer-model-text-display: none` 和 `--dsh-composer-model-icon-display: block`；两者默认值分别为 `block` 和 `none`。若连图标也放不下，仍允许换行。

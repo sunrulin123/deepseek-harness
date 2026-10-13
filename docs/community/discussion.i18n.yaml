@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for discussion.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/community/discussion.md
+/community-discussion-draft:
+  en: a2f6d231e2cae454
+  zh: 12f99f9db447a67e
+/community-discussion-draft/summary:
+  en: e308ed53f6ee1136
+  zh: 1a59a11e8ac12ac5
+/community-discussion-draft/suggested-title:
+  en: 2dd514e4d6fe86ee
+  zh: ef8ebde2074409d9
+/community-discussion-draft/project-introduction:
+  en: 260657a367269563
+  zh: 5bb4692e73735883
+/community-discussion-draft/integration-and-evidence:
+  en: f943021b670c55ab
+  zh: 20148f1ddd4d706c
+/community-discussion-draft/thanks-and-feedback:
+  en: 706fa2a7c9232e9d
+  zh: 7b1ee8b0380a1760
+/community-discussion-draft/dev-note:
+  en: ea967dcc3f62adeb
+  zh: 011ac62fa962dea4

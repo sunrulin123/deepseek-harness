@@ -85,6 +85,33 @@
   transform: rotate(180deg);
 }
 
+@media (max-width: 767px), (any-pointer: coarse) and (max-width: 1023px) {
+  :global(html[data-community-web-ui='true']) .trigger {
+    min-width: 44px;
+    max-width: min(220px, 36cqw);
+    height: 44px;
+    padding: 0 8px;
+    gap: 4px;
+    border-radius: var(--dsw-radius-md);
+    background: var(--dsw-specific-selector);
+    font-weight: 500;
+  }
+
+  :global(html[data-community-web-ui='true']) .triggerIcon {
+    display: inline-flex;
+  }
+
+  :global(html[data-community-web-ui='true']) .triggerIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  :global(html[data-community-web-ui='true']) .chevron {
+    width: 14px;
+    height: 14px;
+  }
+}
+
 /* Portaled to body and placed from the trigger rect by the component (the
    Menu primitive's portal rules), so the sidebar and the columns' overflow
    clips cannot crop it; z matches the primitive's .portal layer. */

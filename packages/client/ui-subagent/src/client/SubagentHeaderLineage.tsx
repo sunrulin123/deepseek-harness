@@ -7,7 +7,7 @@ import {
 import type { SubagentAddress } from '@deepseek-ai/dsh-subagent/client'
 import type { SessionId } from '@deepseek-ai/dsh-session/types'
 import {
-  IconChevronDownOutlineRegular, IconChevronRightOutlineRegular, IconRefreshOutlineRegular, StateDot, Tooltip,
+  IconBranchOutlineRegular, IconChevronDownOutlineRegular, IconChevronRightOutlineRegular, IconRefreshOutlineRegular, StateDot, Tooltip,
 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { PropsLocale, PropsRuntime, TranslateNS } from '@deepseek-ai/dsh-client-ui-slots'
 import { NS } from './locales.ts'
@@ -400,6 +400,7 @@ function CatalogRows({
 }
 
 interface CatalogDropdownSharedProps extends SubagentCatalogInjected {
+  communityWeb?: boolean
   /** Session whose direct catalog roots the tree. */
   rootSessionId: SessionId
   useSessions: SubagentHeaderLineageProps['useSessions']
@@ -444,7 +445,7 @@ function catalogMenuPosition(trigger: HTMLButtonElement): CSSProperties {
 
 /** One trigger-plus-tree dropdown over the catalog rooted at `rootSessionId`. */
 function CatalogDropdown({
-  rootSessionId, currentSessionId, displayTitle, openTitle, variant,
+  rootSessionId, currentSessionId, displayTitle, openTitle, variant, communityWeb = false,
   useSessions, useSessionStatus, openChild, openChildAside, refreshProjection, t,
 }: CatalogDropdownProps) {
   const ancestorSwitcher = variant === 'switcher' && openTitle !== undefined
@@ -657,6 +658,8 @@ function CatalogDropdown({
           : css.trigger}
         aria-haspopup="tree"
         aria-expanded={open}
+        data-community-header-control={communityWeb ? 'subagents' : undefined}
+        title={communityWeb ? t(totalCountKey, { count: directCount }) : undefined}
         aria-label={variant === 'switcher'
           ? t('switcher.aria', { title: switcherDisplayTitle })
           : t(
@@ -691,7 +694,8 @@ function CatalogDropdown({
                   <StateDot state="ongoing" />
                 </span>
               )}
-              <span className={css.count}>{t(totalCountKey, { count: directCount })}</span>
+              {communityWeb && <IconBranchOutlineRegular size={20} />}
+              <span className={css.count}>{communityWeb ? directCount : t(totalCountKey, { count: directCount })}</span>
             </>
           )}
         {variant === 'switcher'
@@ -742,7 +746,7 @@ export type SubagentCatalogActionProps =
  * @returns The count dropdown, or null on a child session.
  */
 export function SubagentCatalogAction({
-  sessionId, useSessions, useSessionStatus, openChild, openChildAside, refreshProjection, t,
+  sessionId, useSessions, useSessionStatus, openChild, openChildAside, refreshProjection, t, communityWeb = false,
 }: SubagentCatalogActionProps) {
   const isChild = useSessions(state => state.byId[sessionId]?.origin === 'subagent')
   if (isChild) return null
@@ -751,6 +755,7 @@ export function SubagentCatalogAction({
       key={sessionId}
       rootSessionId={sessionId}
       variant="count"
+      communityWeb={communityWeb}
       useSessions={useSessions}
       useSessionStatus={useSessionStatus}
       openChild={openChild}
